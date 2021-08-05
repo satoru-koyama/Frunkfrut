@@ -51,7 +51,7 @@
 * 暇つぶしをしたいとき
 
 ## ◆設計書
-<...>
+<https://docs.google.com/presentation/d/1HWAAIxLsf53nRHJACS8HJOp-jro6v8T0aDJbvkvKiG0/edit#slide=id.ge7b199fb1b_0_739>
 
 ## ◆チャレンジ要素一覧
 <https://docs.google.com/spreadsheets/d/1lmwbjhZBkT_EprGQJWvFx5g_83jfvXwvXKRweDEyIoA/edit#gid=0>
