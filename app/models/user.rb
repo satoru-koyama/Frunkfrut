@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  attachment :user_image
+
   # 関連付け
   has_many :following_relationships, class_name: :FollowRelationship, foreign_key: :follow_id, dependent: :destroy
   has_many :followed_relationships, class_name: :FollowRelationship, foreign_key: :followed_id, dependent: :destroy

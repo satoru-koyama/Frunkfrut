@@ -1,4 +1,7 @@
 class Reply < ApplicationRecord
+
+  attachment :reply_image
+
   # 関連付け
   belongs_to :comment
   belongs_to :user

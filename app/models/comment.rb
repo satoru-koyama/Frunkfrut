@@ -1,4 +1,7 @@
 class Comment < ApplicationRecord
+
+  attachment :comment_image
+
   # 関連付け
   belongs_to :post
   belongs_to :user
