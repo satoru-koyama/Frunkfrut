@@ -1,0 +1,2 @@
+class ReplyReport < ApplicationRecord
+end

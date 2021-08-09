@@ -1,0 +1,2 @@
+class BlockRelationship < ApplicationRecord
+end
