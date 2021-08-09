@@ -30,8 +30,6 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: :true, length: { maximum: 50 }
   validates :profile, length: { maximum: 500 }
-  nickname :nickname, length: { maximum: 25 }
-
-
+  validates :nickname, length: { maximum: 25 }
 
 end
