@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  attachment :user_image
+
   # 関連付け
   has_many :following_relationships, class_name: :FollowRelationship, foreign_key: :follow_id, dependent: :destroy
   has_many :followed_relationships, class_name: :FollowRelationship, foreign_key: :followed_id, dependent: :destroy
@@ -23,6 +26,12 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
+
+  # バリデーション
+  validates :name, presence: :true, length: { maximum: 50 }
+  validates :profile, length: { maximum: 500 }
+  nickname :nickname, length: { maximum: 25 }
+
 
 
 end
