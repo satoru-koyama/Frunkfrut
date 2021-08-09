@@ -9,6 +9,7 @@ class Reply < ApplicationRecord
   has_many :reply_favorites, dependent: :destroy
 
   # バリデーション
-
+  validates :text, presence: true, unless: :reply_image
+  validates :reply_image, presence: true, unless: :text
 
 end

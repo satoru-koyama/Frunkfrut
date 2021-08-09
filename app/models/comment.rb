@@ -10,5 +10,6 @@ class Comment < ApplicationRecord
   has_many :comments_favorites, dependent: :destroy
 
   # バリデーション
-
+  validates :text, presence: true, unless: :comment_image
+  validates :comment_image, presence: true, unless: :text
 end

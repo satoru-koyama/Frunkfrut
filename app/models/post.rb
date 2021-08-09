@@ -9,5 +9,7 @@ class Post < ApplicationRecord
   has_many :post_favorites, dependent: :destroy
 
   # バリデーション
+  validates :text, presence: true, unless: :post_image
+  validates :post_image, presence: true, unless: :text
 
 end
