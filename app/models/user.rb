@@ -17,13 +17,13 @@ class User < ApplicationRecord
   has_many :blocked_users, through: :blocking_relationships, source: :blocked_user
   has_many :blocking_users, through: :blocked_relationships, source: :blocking_user
 
-  has_many :posts, dependent: :destroy
+  has_many :posts
   has_many :post_reports, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :comments
   has_many :comments_reports, dependent: :destroy
   has_many :comments_favorites, dependent: :destroy
-  has_many :replies, dependent: :destroy
+  has_many :replies
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
 
