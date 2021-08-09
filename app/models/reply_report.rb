@@ -3,4 +3,6 @@ class ReplyReport < ApplicationRecord
   belongs_to :reply
   belongs_to :user
 
+  # バリデーション
+
 end

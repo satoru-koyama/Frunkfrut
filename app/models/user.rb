@@ -24,5 +24,11 @@ class User < ApplicationRecord
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
 
+  # バリデーション
+  validates :name, presence: :true, length: { maximum: 50 }
+  validates :profile, length: { maximum: 500 }
+  nickname :nickname, length: { maximum: 25 }
+
+
 
 end

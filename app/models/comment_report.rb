@@ -3,4 +3,6 @@ class CommentReport < ApplicationRecord
   belongs_to :comment
   belongs_to :user
 
+  # バリデーション
+
 end

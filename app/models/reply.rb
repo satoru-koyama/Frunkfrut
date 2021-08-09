@@ -5,4 +5,7 @@ class Reply < ApplicationRecord
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
 
+  # バリデーション
+
+
 end

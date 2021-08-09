@@ -6,4 +6,6 @@ class Comment < ApplicationRecord
   has_many :comments_reports, dependent: :destroy
   has_many :comments_favorites, dependent: :destroy
 
+  # バリデーション
+
 end
