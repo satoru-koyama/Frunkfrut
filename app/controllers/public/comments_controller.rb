@@ -9,6 +9,8 @@ class Public::CommentsController < ApplicationController
   end
 
   def show
+    @comment = Comment.find(params[:id])
+    @reply = Reply.new
   end
 
   def update

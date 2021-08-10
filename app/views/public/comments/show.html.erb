@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button>返信</button>
+    </div>
+    <div class="col">
+      <div class="row">
+        <p class="col">返信してください</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_with model: @reply, url: comment_replies_path(@comment.id), method: :post, local: true, class:"col" do |f| %>
+      <%= f.text_field :text %>
+      <%= f.file_field :reply_image %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+</div>
