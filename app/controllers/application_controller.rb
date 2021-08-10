@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     @new_post = Post.new
   end
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :user_image, :profile, :nickname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
 end

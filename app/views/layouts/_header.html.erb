@@ -3,13 +3,28 @@
     <div class="col"><h2>Frunkfrut</h2></div>
     <div class="col">
       <div class="row">
-        <div class="col"></div>
+        <% if user_signed_in? %>
+          <div class="col">
+            <%= attachment_image_tag current_user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+          </div>
+          <p class="col">
+            <% if current_user.nickname.blank? %>
+              no name
+            <% else %>
+              <%= current_user.nickname %>
+            <% end %>
+          </p>
+          <li class="col", style="display: inline"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li class="col", style="display: inline"><%= link_to "会員登録", new_user_registration_path %></li>
+          <li class="col", style="display: inline"><%= link_to "ログイン", new_user_session_path %></li>
+        <% end %>
       </div>
-      <div class="row", style="margin: 0, padding: 0">
-        <li class="col", style="display: inline">サイト紹介</li>
-        <li class="col", style="display: inline">マイページ</li>
-        <li class="col", style="display: inline">フォロ一覧</li>
-        <li class="col", style="display: inline">ランキング</li>
+      <div class="row">
+        <li class="col", style="display: inline"><%= link_to "サイト紹介", about_path %></li>
+        <li class="col", style="display: inline"><%= link_to "マイページ", my_page_users_path %></li>
+        <li class="col", style="display: inline"><%= link_to "フォロ一覧", follow_users_path %></li>
+        <li class="col", style="display: inline"><%= link_to "ランキング", ranking_users_path %></li>
       </div>
     </div>
   </div>
