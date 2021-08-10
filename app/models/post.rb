@@ -12,4 +12,11 @@ class Post < ApplicationRecord
   validates :text, presence: true, unless: :post_image
   validates :post_image, presence: true, unless: :text
 
+
+  def countdown
+    now = Time.current
+    return self.created_at.since(3.days) - now
+  end
+
+
 end

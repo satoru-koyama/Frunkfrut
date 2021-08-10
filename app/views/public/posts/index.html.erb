@@ -1,0 +1,60 @@
+<% @posts.each do |post| %>
+  <div class="container">
+    <div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <%= attachment_image_tag post.user, :user_image, :fill, 30, 30, format:'jpg', fallback: "noimage.jpg" %>
+            </div>
+            <p class="col">
+              <%= post.user.name %>
+            </p>
+          </div>
+        </div>
+        <div class="col">
+          <p class="col">
+
+          </p>
+          <p class="col">
+            <% if post.post_favorites.find_by(user_id: current_user).nil? && user_signed_in? %>
+              <%= link_to post_post_favorites_path(post.id), method: :post do %>
+                いいねを付ける<i class="fa-solid fa-thumbs-up",style="color: blue"></i>
+                <%= post.post_favorites.all.count %>
+              <% end %>
+            <% else post.post_favorites.find_by(user_id: current_user) && user_signed_in? %>
+              <%= link_to post_post_favorite_path(post_id: post.id, id: post.post_favorites.find_by(user_id: current_user).id), method: :delete do %>
+                いいねを外す<i class="fa-solid fa-thumbs-up",style="color: red"></i>
+                <%= post.post_favorites.all.count %>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="col">
+          <%= post.text %>
+        </p>
+      </div>
+      <div class="row">
+        <p class="col">
+          <%= post.created_at %>
+        </p>
+        <p class="col">
+          <%= post.countdown %>
+        </p>
+        <p class="col">
+          <% if post.post_reports.find_by(user_id: current_user).nil? && user_signed_in? %>
+            <%= link_to post_post_reports_path(post.id), method: :post do %>
+              報告をする<i class="fa-solid fa-triangle-exclamation",style="color: blue"></i>
+            <% end %>
+          <% else post.post_reports.find_by(user_id: current_user) && user_signed_in? %>
+            <%= link_to post_post_report_path(post_id: post.id, id: post.post_reports.find_by(user_id: current_user).id), method: :delete do %>
+              報告を取り消す<i class="fa-solid fa-triangle-exclamation",style="color: red"></i>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
