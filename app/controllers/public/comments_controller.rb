@@ -11,6 +11,7 @@ class Public::CommentsController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     @reply = Reply.new
+    @replies = Reply.all
   end
 
   def update
