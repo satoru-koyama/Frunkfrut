@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button>コメント</button>
+    </div>
+    <div class="col">
+      <div class="row">
+        <p class="col">コメントしてください</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_with model: @comment, url: post_comments_path(@post.id), method: :post, local: true, class:"col" do |f| %>
+      <%= f.text_field :text %>
+      <%= f.file_field :comment_image %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+</div>

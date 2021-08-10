@@ -1,19 +1,54 @@
 <div class="container">
   <div class="row">
+    <div class="col">
+      <button>投稿一覧</button>
+    </div>
+    <div class="col">
+      <div class="row">
+        <p class="col">投稿してください</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row">
       <div class="col">
-        <button>投稿一覧</button>
+        <button>新着一覧</button>
       </div>
       <div class="col">
         <div class="row">
-          <p class="col">投稿してください</p>
+          <p class="col">押してください</p>
         </div>
       </div>
     </div>
     <div class="row">
-      <%= form_with model: post, url: posts_path, method: :post, local: true, class:"col" do |f| %>
-        <%= f.text_field :text %>
-        <%= f.file_field :post_image %>
-        <%= f.submit "送信" %>
-      <% end %>
+      <div class="col">
+        <button>タイムライン</button>
+      </div>
+      <div class="col">
+        <div class="row">
+          <p class="col">押してください</p>
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <button>自分の投稿</button>
+      </div>
+      <div class="col">
+        <div class="row">
+          <p class="col">押してください</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button>コメントした投稿</button>
+      </div>
+      <div class="col">
+        <div class="row">
+          <p class="col">押してください</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
