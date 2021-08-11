@@ -1,9 +1,4 @@
-<%= render partial: 'public/posts/show_post', locals: { post: @post } %>
-<% if user_signed_in? %>
-  <%= render partial: 'public/posts/new_comment', locals: { post: @post, comment: @comment } %>
-<% end %>
-<% @comments.each do |comment| %>
-  <div class="container">
+<div class="container">
     <div>
       <div class="row">
         <div class="col">
@@ -60,4 +55,3 @@
       </div>
     </div>
   </div>
-<% end %>

@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <header>
+      <%= render partial: 'layouts/header', locals: {} %>
+    </header>
+    <!--新規投稿-->
+    <%= render partial: 'layouts/new_post', locals: { post: @new_post } %>
+    <!--投稿一覧-->
+    <%= render partial: 'layouts/post_index', locals: {} %>
+    <!--フラッシュメッセージ-->
+    <%= render partial: 'layouts/flash', locals: {} %>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <h3 class="col">アカウント情報</h3>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table>
+        <thead>
+          <tr>
+            <th>アカウント画像</th>
+            <th>ニックネーム</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              <%= attachment_image_tag current_user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+            </th>
+            <th>
+              <% if current_user.nickname.blank? %>
+                no name
+              <% else %>
+                <%= current_user.nickname %>
+              <% end %>
+            </th>
+            <th>
+              <% if current_user.followed_users.find_by(id: @user.id).nil? && user_signed_in? %>
+                <%= link_to user_follow_relationships_path(user_id: @user.id), method: :post do %>
+                  <button>フォローする</button>
+                <% end %>
+              <% elsif current_user.followed_users.find_by(id: @user.id) && user_signed_in? %>
+                <%= link_to user_follow_relationships_path(user_id: @user.id), method: :delete do %>
+                  <button>フォローを外す</button>
+                <% end %>
+              <% end %>
+            </th>
+            <th>
+              <% if current_user.blocked_users.find_by(id: @user.id).nil? && user_signed_in? %>
+                <%= link_to user_block_relationships_path(user_id: @user.id), method: :post do %>
+                  <button>ブロックする</button>
+                <% end %>
+              <% elsif current_user.blocked_users.find_by(id: @user.id) && user_signed_in? %>
+                <%= link_to user_block_relationships_path(user_id: @user.id), method: :delete do %>
+                  <button>ブロックを外す</button>
+                <% end %>
+              <% end %>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <table class="col">
+      <thead>
+        <tr>
+          <th>自己紹介</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            <% if current_user.profile.blank? %>
+            <% else %>
+              <%= current_user.profile %>
+            <% end %>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <h3 class="col">コメントの評価</h3>
+  </div>
+  <div class="row">
+    <table class="col">
+      <tr>
+        <td>今週のいいね数</td>
+        <td><%= @user.this_week_favorite_count %></td>
+      </tr>
+      <tr>
+        <td>直近1ヶ月のいいね数</td>
+        <td><%= @user.day30_favorite_count %></td>
+      </tr>
+      <tr>
+        <td>トータルいいね数</td>
+        <td><%= @user.total_favorite_count %></td>
+      </tr>
+    </table>
+  </div>
+</div>
