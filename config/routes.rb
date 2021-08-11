@@ -36,8 +36,8 @@ Rails.application.routes.draw do
           patch "delete"
         end
       end
-      resources "post_favorites", only: [:create, :destroy]
-      resources "post_reports", only: [:create, :destroy]
+      resource "post_favorites", only: [:create, :destroy]
+      resource "post_reports", only: [:create, :destroy]
     end
     resources "comments", only: [] do
       resources "replies", only: [:create, :update] do
@@ -45,12 +45,12 @@ Rails.application.routes.draw do
           patch "delete"
         end
       end
-      resources "comment_favorites", only: [:create, :destroy]
-      resources "comment_reports", only: [:create, :destroy]
+      resource "comment_favorites", only: [:create, :destroy]
+      resource "comment_reports", only: [:create, :destroy]
     end
     resources "replies", only: [] do
-      resources "reply_favorites", only: [:create, :destroy]
-      resources "reply_reports", only: [:create, :destroy]
+      resource "reply_favorites", only: [:create, :destroy]
+      resource "reply_reports", only: [:create, :destroy]
     end
     resources "users", only: [:show, :update] do
       collection do
@@ -59,8 +59,8 @@ Rails.application.routes.draw do
         get "my_page"
         get "ranking"
       end
-      resources "follow_relationships", only: [:create, :destroy]
-      resources "block_relationships", only: [:create, :destroy]
+      resource "follow_relationships", only: [:create, :destroy]
+      resource "block_relationships", only: [:create, :destroy]
     end
   end
 

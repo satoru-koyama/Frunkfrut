@@ -9,7 +9,7 @@ class Public::CommentReportsController < ApplicationController
   end
 
   def destroy
-    @comment_report = CommentReport.find(params[:id])
+    @comment_report = CommentReport.find_by(user_id: current_user.id, comment_id: params[:comment_id])
     @comment_report.destroy
     redirect_to request.referer
   end

@@ -23,7 +23,7 @@
                   <%= post.post_favorites.all.count %>
                 <% end %>
               <% elsif post.post_favorites.find_by(user_id: current_user) && user_signed_in? %>
-                <%= link_to post_post_favorite_path(post_id: post.id, id: post.post_favorites.find_by(user_id: current_user).id), method: :delete do %>
+                <%= link_to post_post_favorites_path(post_id: post.id), method: :delete do %>
                   いいねを外す<i class="fa-solid fa-thumbs-up",style="color: red"></i>
                   <%= post.post_favorites.all.count %>
                 <% end %>
@@ -50,7 +50,7 @@
               報告をする<i class="fa-solid fa-triangle-exclamation",style="color: blue"></i>
             <% end %>
           <% elsif post.post_reports.find_by(user_id: current_user) && user_signed_in? %>
-            <%= link_to post_post_report_path(post_id: post.id, id: post.post_reports.find_by(user_id: current_user).id), method: :delete do %>
+            <%= link_to post_post_reports_path(post_id: post.id), method: :delete do %>
               報告を取り消す<i class="fa-solid fa-triangle-exclamation",style="color: red"></i>
             <% end %>
           <% end %>

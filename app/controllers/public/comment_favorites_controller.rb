@@ -9,7 +9,7 @@ class Public::CommentFavoritesController < ApplicationController
   end
 
   def destroy
-    @comment_favorite = CommentFavorite.find(params[:id])
+    @comment_favorite = CommentFavorite.find_by(user_id: current_user.id, comment_id: params[:comment_id])
     @comment_favorite.destroy
     redirect_to request.referer
   end

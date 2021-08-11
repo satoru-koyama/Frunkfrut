@@ -21,8 +21,8 @@ class User < ApplicationRecord
   has_many :post_reports, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
   has_many :comments
-  has_many :comments_reports, dependent: :destroy
-  has_many :comments_favorites, dependent: :destroy
+  has_many :comment_reports, dependent: :destroy
+  has_many :comment_favorites, dependent: :destroy
   has_many :replies
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
@@ -31,5 +31,45 @@ class User < ApplicationRecord
   validates :name, presence: :true, length: { maximum: 50 }
   validates :profile, length: { maximum: 500 }
   validates :nickname, length: { maximum: 25 }
+
+  def this_week_favorite_count
+    total_count = 0
+    [self.post_favorites, self.comment_favorites, self.reply_favorites].each do |favorites|
+      t = Date.today
+      case t.wday
+      when 0
+        finish_day = t
+      when 1
+        finish_day = t - 1
+      when 2
+        finish_day = t - 2
+      when 3
+        finish_day = t - 3
+      when 4
+        finish_day = t - 4
+      when 5
+        finish_day = t - 5
+      when 6
+        finish_day = t - 6
+      end
+      count = favorites.where("? = 1", created_at <=> finish_day).count
+      total_count += count
+    end
+    return total_count
+  end
+
+  def day30_favorite_count
+    total_count = 0
+    [self.post_favorites, self.comment_favorites, self.reply_favorites].each do |favorites|
+      t = Date.today - 31
+      count = favorites.where("? = 1", created_at <=> t).count
+      total_count += count
+    end
+    return total_count
+  end
+
+  def total_favorite_count
+    self.post_favorites.all.count + self.comment_favorites.all.count + self.reply_favorites.all.count
+  end
 
 end

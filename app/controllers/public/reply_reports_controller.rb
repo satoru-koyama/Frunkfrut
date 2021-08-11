@@ -9,7 +9,7 @@ class Public::ReplyReportsController < ApplicationController
   end
 
   def destroy
-    @reply_report = ReplyReport.find(params[:id])
+    @reply_report = ReplyReport.find_by(user_id: current_user.id, reply_id: params[:reply_id])
     @reply_report.destroy
     redirect_to request.referer
   end
