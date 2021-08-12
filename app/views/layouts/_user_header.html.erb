@@ -3,8 +3,17 @@
     <div class="col"><h2>Frunkfrut</h2></div>
     <div class="col">
       <div class="row">
-          <li class="col", style="display: inline"><%= link_to "会員登録", new_user_registration_path %></li>
-          <li class="col", style="display: inline"><%= link_to "ログイン", new_user_session_path %></li>
+        <div class="col">
+          <%= attachment_image_tag current_user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+        </div>
+        <p class="col">
+          <% if current_user.nickname.blank? %>
+            no name
+          <% else %>
+            <%= current_user.nickname %>
+          <% end %>
+        </p>
+        <li class="col", style="display: inline"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
       </div>
       <div class="row">
         <li class="col", style="display: inline"><%= link_to "サイト紹介", about_path %></li>

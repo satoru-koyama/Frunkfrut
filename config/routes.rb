@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       registrations: 'admin/admins/registrations'
     }
 
-    get "/", to: "homes#top", as: "top"
+    get "/", to: "homes#top", as: :root
 
     resources "posts", only: [:show]
 
@@ -33,11 +33,12 @@ Rails.application.routes.draw do
       registrations: 'public/users/registrations'
     }
 
-    root "homes#top", as: "top"
+    root "homes#top", as: :top
 
-    get "/about", to: "homes#about", as: "about"
+    get "/about", to: "homes#about", as: :about
 
-    resources "posts", only: [:index, :show, :create, :update] do
+    get "/posts", to: "posts#index", as: :user_root
+    resources "posts", only: [:show, :create, :update] do
       member do
         patch "delete"
       end

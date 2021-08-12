@@ -11,7 +11,16 @@
 
   <body>
     <header>
-      <%= render partial: 'layouts/header', locals: {} %>
+      <% if user_signed_in? %>
+        <!--ユーザー側ヘッダー-->
+        <%= render partial: 'layouts/user_header', locals: {} %>
+      <% elsif admin_signed_in? %>
+        <!--管理者側ヘッダー-->
+        <%= render partial: 'layouts/admin_header', locals: {} %>
+      <% else %>
+        <!--どちらもログインしていないときのヘッダー-->
+        <%= render partial: 'layouts/header', locals: {} %>
+      <% end %>
     </header>
     <!--新規投稿-->
     <%= render partial: 'layouts/new_post', locals: { post: @new_post } %>

@@ -72,4 +72,7 @@ class User < ApplicationRecord
     self.post_favorites.all.count + self.comment_favorites.all.count + self.reply_favorites.all.count
   end
 
+  def report_count
+    self.post_reports.all.count + self.comment_reports.all.count + self.reply_reports.all.count
+  end
 end
