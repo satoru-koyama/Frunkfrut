@@ -244,6 +244,8 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
+
+  # デバイスを使って、複数で管理するときに下の文に変更を加えると記述があったので変更
   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first

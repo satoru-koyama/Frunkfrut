@@ -1,5 +1,8 @@
 class Public::CommentFavoritesController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @comment_favorite = CommentFavorite.new
     @comment_favorite.user_id = current_user.id

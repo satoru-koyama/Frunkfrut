@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-
     devise_for :admins, controllers: {
       sessions:      'admin/admins/sessions',
       passwords:     'admin/admins/passwords',
       registrations: 'admin/admins/registrations'
     }
 
-    get "/", to: "homes#top", as: "top"
+    devise_for :users, controllers: {
+      sessions:      'public/users/sessions',
+      passwords:     'public/users/passwords',
+      registrations: 'public/users/registrations'
+    }
+
+  namespace :admin do
+
+    get "/", to: "homes#top", as: :root
 
     resources "posts", only: [:show]
 
@@ -27,17 +33,12 @@ Rails.application.routes.draw do
 
   scope module: :public do
 
-    devise_for :users, controllers: {
-      sessions:      'public/users/sessions',
-      passwords:     'public/users/passwords',
-      registrations: 'public/users/registrations'
-    }
+    root "homes#top", as: :top
 
-    root "homes#top", as: "top"
+    get "/about", to: "homes#about", as: :about
 
-    get "/about", to: "homes#about", as: "about"
-
-    resources "posts", only: [:index, :show, :create, :update] do
+    get "/posts", to: "posts#index", as: :user_root
+    resources "posts", only: [:show, :create, :update] do
       member do
         patch "delete"
       end

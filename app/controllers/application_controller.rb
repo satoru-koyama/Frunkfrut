@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when Admin
-      admin_top_path
+      admin_root_path
     when User
-      posts_path
+      user_root_path
     end
   end
 
@@ -26,5 +26,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+
+  # Uderのカラムis_deletedがtrueのユーザーはログアウトさせる
+    def sign_out_user
+      sign_out_and_redirect(current_user) if current_user.is_deleted == true
+    end
 
 end

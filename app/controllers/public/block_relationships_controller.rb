@@ -1,5 +1,8 @@
 class Public::BlockRelationshipsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @block_relationship = BlockRelationship.new
     @block_relationship.block_id = current_user.id

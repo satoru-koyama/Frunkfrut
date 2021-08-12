@@ -1,5 +1,8 @@
 class Public::PostsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!, except: [:index, :show]
+
   def create
     post = Post.new(post_params)
     post.user_id = current_user.id

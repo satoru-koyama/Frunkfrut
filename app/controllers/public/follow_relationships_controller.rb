@@ -1,5 +1,8 @@
 class Public::FollowRelationshipsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @follow_relationship = FollowRelationship.new
     @follow_relationship.follow_id = current_user.id

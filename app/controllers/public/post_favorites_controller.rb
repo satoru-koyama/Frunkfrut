@@ -1,5 +1,8 @@
 class Public::PostFavoritesController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @post_favorite = PostFavorite.new
     @post_favorite.user_id = current_user.id
