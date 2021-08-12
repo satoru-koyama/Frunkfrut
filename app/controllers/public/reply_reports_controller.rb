@@ -1,5 +1,8 @@
 class Public::ReplyReportsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @reply_report = ReplyReport.new
     @reply_report.user_id = current_user.id

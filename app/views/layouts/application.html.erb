@@ -14,7 +14,7 @@
       <% if user_signed_in? %>
         <!--ユーザー側ヘッダー-->
         <%= render partial: 'layouts/user_header', locals: {} %>
-      <% elsif admin_signed_in? %>
+      <%# elsif admin_signed_in? %>
         <!--管理者側ヘッダー-->
         <%= render partial: 'layouts/admin_header', locals: {} %>
       <% else %>

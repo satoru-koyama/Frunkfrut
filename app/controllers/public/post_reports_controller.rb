@@ -1,5 +1,8 @@
 class Public::PostReportsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @post_report = PostReport.new
     @post_report.user_id = current_user.id

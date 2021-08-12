@@ -1,5 +1,8 @@
 class Public::ReplyFavoritesController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @reply_favorite = ReplyFavorite.new
     @reply_favorite.user_id = current_user.id

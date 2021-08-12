@@ -1,5 +1,8 @@
 class Public::RepliesController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     reply = Reply.new(reply_params)
     reply.user_id = current_user.id

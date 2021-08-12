@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-
     devise_for :admins, controllers: {
       sessions:      'admin/admins/sessions',
       passwords:     'admin/admins/passwords',
       registrations: 'admin/admins/registrations'
     }
+
+    devise_for :users, controllers: {
+      sessions:      'public/users/sessions',
+      passwords:     'public/users/passwords',
+      registrations: 'public/users/registrations'
+    }
+
+  namespace :admin do
 
     get "/", to: "homes#top", as: :root
 
@@ -26,12 +32,6 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-
-    devise_for :users, controllers: {
-      sessions:      'public/users/sessions',
-      passwords:     'public/users/passwords',
-      registrations: 'public/users/registrations'
-    }
 
     root "homes#top", as: :top
 

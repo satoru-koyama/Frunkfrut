@@ -1,5 +1,8 @@
 class Public::CommentReportsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   def create
     @comment_report = CommentReport.new
     @comment_report.user_id = current_user.id
