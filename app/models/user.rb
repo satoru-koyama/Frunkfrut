@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  attachment :user_image
+  attachment :image
 
   # 関連付け
   has_many :following_relationships, class_name: :FollowRelationship, foreign_key: :follow_id, dependent: :destroy
@@ -34,25 +34,26 @@ class User < ApplicationRecord
 
   def this_week_favorite_count
     total_count = 0
+    now_time = Time.zone.now
+    t = Time.parse("#{now_time.year}-#{now_time.month}-#{now_time.day}")
     [self.post_favorites, self.comment_favorites, self.reply_favorites].each do |favorites|
-      t = Date.today
       case t.wday
       when 0
-        finish_day = t
+        start_time = t
       when 1
-        finish_day = t - 1
+        start_time = t - ( 60 * 60 * 24 * 1 )
       when 2
-        finish_day = t - 2
+        start_time = t - ( 60 * 60 * 24 * 2 )
       when 3
-        finish_day = t - 3
+        start_time = t - ( 60 * 60 * 24 * 3 )
       when 4
-        finish_day = t - 4
+        start_time = t - ( 60 * 60 * 24 * 4 )
       when 5
-        finish_day = t - 5
+        start_time = t - ( 60 * 60 * 24 * 5 )
       when 6
-        finish_day = t - 6
+        start_time = t - ( 60 * 60 * 24 * 6 )
       end
-      count = favorites.where("? = 1", created_at <=> finish_day).count
+      count = favorites.where("created_at > ?", start_time ).count
       total_count += count
     end
     return total_count
@@ -61,8 +62,10 @@ class User < ApplicationRecord
   def day30_favorite_count
     total_count = 0
     [self.post_favorites, self.comment_favorites, self.reply_favorites].each do |favorites|
-      t = Date.today - 31
-      count = favorites.where("? = 1", created_at <=> t).count
+      now_time = Time.zone.now
+      t = Time.parse("#{now_time.year}-#{now_time.month}-#{now_time.day}")
+      start_time = t - ( 60 * 60 * 24 * 30 )
+      count = favorites.where("created_at > ?", start_time ).count
       total_count += count
     end
     return total_count
@@ -75,4 +78,12 @@ class User < ApplicationRecord
   def report_count
     self.post_reports.all.count + self.comment_reports.all.count + self.reply_reports.all.count
   end
+
+  # 退会済み(is_deleted==true)のユーザーを弾くためのメソッドを作成
+  # active_for_authentication?　はアクティブなユーザーの場合にtrueを返す
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
+
+
 end

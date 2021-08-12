@@ -19,7 +19,7 @@ class Public::RepliesController < ApplicationController
 
   private
   def reply_params
-    params.require(:reply).permit(:text, :reply_image)
+    params.require(:reply).permit(:text, :image)
   end
 
 end

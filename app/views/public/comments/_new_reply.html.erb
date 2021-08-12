@@ -10,7 +10,7 @@
   <div class="row">
     <%= form_with model: reply, url: comment_replies_path(comment.id), method: :post, local: true, class:"col" do |f| %>
       <%= f.text_field :text %>
-      <%= f.file_field :reply_image %>
+      <%= f.file_field :image %>
       <%= f.submit "送信" %>
     <% end %>
   </div>

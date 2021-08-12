@@ -11,13 +11,14 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
+    @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = Comment.all.order(id: :DESC)
   end
 
   def update
@@ -28,7 +29,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:text, :post_image)
+    params.require(:post).permit(:text, :image)
   end
 
 end

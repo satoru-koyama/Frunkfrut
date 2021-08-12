@@ -1,11 +1,20 @@
 class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
   before_action :new_post, if: :user_signed_in?
 
 
   protected
+  # ログイン先を指定
+  def after_sign_up_path_for(resource)
+    case resource
+    when Admin
+      admin_root_path
+    when User
+      user_root_path
+    end
+  end
+
   # ログイン先を指定
   def after_sign_in_path_for(resource)
     case resource

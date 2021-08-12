@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_141932) do
+ActiveRecord::Schema.define(version: 2021_08_12_124552) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_141932) do
     t.integer "post_id", null: false
     t.integer "user_id", null: false
     t.text "text"
-    t.string "comment_image_id"
+    t.string "image_id"
     t.boolean "is_deleted", default: false, null: false
   end
 
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_141932) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.text "text"
-    t.string "post_image_id"
+    t.string "image_id"
     t.boolean "is_deleted", default: false, null: false
   end
 
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_141932) do
     t.integer "comment_id", null: false
     t.integer "user_id", null: false
     t.text "text"
-    t.string "reply_image_id"
+    t.string "image_id"
     t.boolean "is_deleted", default: false, null: false
   end
 
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_141932) do
     t.datetime "updated_at", null: false
     t.string "name", null: false
     t.text "profile"
-    t.string "user_image_id"
+    t.string "image_id"
     t.string "nickname"
     t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -10,35 +10,39 @@
   <div>
     <div class="row">
       <div class="col">
-        <button>新着一覧</button>
+        <%= link_to posts_path do %>
+          <button>新着一覧</button>
+        <% end %>
       </div>
       <div class="col">
         <p>押してください</p>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <button>タイムライン</button>
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="col">
+          <button>タイムライン</button>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-      <div class="col">
-        <p>押してください</p>
+      <div class="row">
+        <div class="col">
+          <button>自分の投稿</button>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button>自分の投稿</button>
+      <div class="row">
+        <div class="col">
+          <button>コメントした投稿</button>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-      <div class="col">
-        <p>押してください</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button>コメントした投稿</button>
-      </div>
-      <div class="col">
-        <p>押してください</p>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

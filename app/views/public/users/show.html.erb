@@ -16,7 +16,7 @@
         <tbody>
           <tr>
             <th>
-              <%= attachment_image_tag current_user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+              <%= attachment_image_tag current_user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
             </th>
             <th>
               <% if current_user.nickname.blank? %>
@@ -26,22 +26,22 @@
               <% end %>
             </th>
             <th>
-              <% if current_user.followed_users.find_by(id: @user.id).nil? && user_signed_in? %>
+              <% if current_user.followed_users.find_by(id: @user.id).nil? && user_signed_in? && current_user.id != @user.id && @user.is_deleted == false %>
                 <%= link_to user_follow_relationships_path(user_id: @user.id), method: :post do %>
                   <button>フォローする</button>
                 <% end %>
-              <% elsif current_user.followed_users.find_by(id: @user.id) && user_signed_in? %>
+              <% elsif current_user.followed_users.find_by(id: @user.id) && user_signed_in? && current_user.id != @user.id && @user.is_deleted == false %>
                 <%= link_to user_follow_relationships_path(user_id: @user.id), method: :delete do %>
                   <button>フォローを外す</button>
                 <% end %>
               <% end %>
             </th>
             <th>
-              <% if current_user.blocked_users.find_by(id: @user.id).nil? && user_signed_in? %>
+              <% if current_user.blocked_users.find_by(id: @user.id).nil? && user_signed_in? && current_user.id != @user.id && @user.is_deleted == false %>
                 <%= link_to user_block_relationships_path(user_id: @user.id), method: :post do %>
                   <button>ブロックする</button>
                 <% end %>
-              <% elsif current_user.blocked_users.find_by(id: @user.id) && user_signed_in? %>
+              <% elsif current_user.blocked_users.find_by(id: @user.id) && user_signed_in? && current_user.id != @user.id && @user.is_deleted == false %>
                 <%= link_to user_block_relationships_path(user_id: @user.id), method: :delete do %>
                   <button>ブロックを外す</button>
                 <% end %>
