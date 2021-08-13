@@ -26,13 +26,14 @@ class User < ApplicationRecord
   has_many :replies
   has_many :reply_reports, dependent: :destroy
   has_many :reply_favorites, dependent: :destroy
+  has_many :rankings, dependent: :destroy
 
   # バリデーション
   validates :name, presence: :true, length: { maximum: 50 }
   validates :profile, length: { maximum: 500 }
   validates :nickname, length: { maximum: 25 }
 
-  def this_week_favorite_count
+  def week_count
     total_count = 0
     now_time = Time.zone.now
     t = Time.parse("#{now_time.year}-#{now_time.month}-#{now_time.day}")
@@ -59,7 +60,7 @@ class User < ApplicationRecord
     return total_count
   end
 
-  def day30_favorite_count
+  def day30_count
     total_count = 0
     [self.post_favorites, self.comment_favorites, self.reply_favorites].each do |favorites|
       now_time = Time.zone.now
@@ -71,7 +72,7 @@ class User < ApplicationRecord
     return total_count
   end
 
-  def total_favorite_count
+  def total_count
     self.post_favorites.all.count + self.comment_favorites.all.count + self.reply_favorites.all.count
   end
 

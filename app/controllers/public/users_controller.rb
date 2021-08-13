@@ -22,7 +22,6 @@ class Public::UsersController < ApplicationController
   end
 
   def ranking
-    @users = User.
   end
 
 end
