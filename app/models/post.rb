@@ -8,6 +8,8 @@ class Post < ApplicationRecord
   has_many :post_reports, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
 
+  has_many :replies, through: :comments
+
   # バリデーション
   validates :text, presence: true, unless: :image
   validates :image, presence: true, unless: :text

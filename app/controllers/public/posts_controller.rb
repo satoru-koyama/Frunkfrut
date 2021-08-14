@@ -18,27 +18,19 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all.order(id: :DESC)
+    @comments = @post.comments.order(id: :DESC)
   end
 
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to request.referer
   end
 
   def delete
-    limit_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
-    posts = Post.where("created_at < ? AND is_deleted = false", limit_time )
-    posts.each do |post|
-      post.update(is_deleted: true)
-      comments = post.comments
-      comments.each do |comments|
-        comment.update(is_deleted: true)
-        replies = comment.replies
-        replies.each do |reply|
-          reply.update(is_deleted: true)
-        end
-      end
-    end
-
+    @post = Post.find(params[:id])
+    @post.update(is_deleted: true)
+    redirect_to request.referer
   end
 
   private

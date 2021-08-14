@@ -12,9 +12,15 @@ class Public::RepliesController < ApplicationController
   end
 
   def update
+    @reply = Reply.find(params[:id])
+    @reply.update(reply_params)
+    redirect_to request.referer
   end
 
   def delete
+    @reply = Reply.find(params[:id])
+    @reply.update(is_deleted: true)
+    redirect_to request.referer
   end
 
   private
