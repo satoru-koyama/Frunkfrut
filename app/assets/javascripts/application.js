@@ -20,4 +20,4 @@
 //= require turbolinks
 //= require_tree .
 
-require('post_index.js')
+require('post.js')

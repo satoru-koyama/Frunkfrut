@@ -4,10 +4,11 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def create
-    post = Post.new(post_params)
-    post.user_id = current_user.id
-    post.save
-    redirect_to posts_path, method: :get
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.save
+    byebug
+    redirect_to user_root_path
   end
 
   def index
