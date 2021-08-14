@@ -11,8 +11,28 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
-    @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+    if params[:id] == "new"
+      start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
+      @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+
+    elsif params[:id] =="followed"
+      @posts = current_user.followed_user_posts.order(id: :DESC)
+
+    elsif params[:id] == "my"
+      @posts = current_user.posts.order(id: :DESC)
+
+
+    elsif params[:id] == "commented"
+      @posts = current_user.commented_posts.order(id: :DESC)
+
+    elsif request.referer == user_root_path
+      start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
+      @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+
+    elsif request.referer != user_root_path
+      start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
+      @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+    end
   end
 
   def show

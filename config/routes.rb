@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get "/about", to: "homes#about", as: :about
 
     get "/posts", to: "posts#index", as: :user_root
+    post "/posts", to: "posts#index", as: :user_root_post
     resources "posts", only: [:show, :create, :update] do
       member do
         patch "delete"

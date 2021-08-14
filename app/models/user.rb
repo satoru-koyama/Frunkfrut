@@ -28,6 +28,9 @@ class User < ApplicationRecord
   has_many :reply_favorites, dependent: :destroy
   has_many :rankings, dependent: :destroy
 
+  has_many :followed_user_posts, through: :followed_users, source: :posts
+  has_many :commented_posts, through: :comments, source: :post
+
   # バリデーション
   validates :name, presence: :true, length: { maximum: 50 }
   validates :profile, length: { maximum: 500 }

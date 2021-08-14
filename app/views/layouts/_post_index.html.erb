@@ -10,8 +10,16 @@
   <div>
     <div class="row">
       <div class="col">
-        <%= link_to posts_path do %>
-          <button>新着一覧</button>
+        <% if request.url == user_root_post_path %>
+          <%= form_with url: user_root_post_path, remote: true do |f| %>
+            <%= hidden_field_tag :id, "new" %>
+            <%= f.submit "新着一覧", id: "new", class: "indexList" %>
+          <% end %>
+        <% elsif request.url != user_root_post_path %>
+          <%= form_with url: user_root_post_path, local: true do |f| %>
+            <%= hidden_field_tag :id, "new" %>
+            <%= f.submit "新着一覧", id: "new", class: "indexList" %>
+          <% end %>
         <% end %>
       </div>
       <div class="col">
@@ -21,7 +29,17 @@
     <% if user_signed_in? %>
       <div class="row">
         <div class="col">
-          <button>タイムライン</button>
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "followed" %>
+              <%= f.submit "タイムライン", id: "followed", class: "indexList" %>
+            <% end %>
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "followed" %>
+              <%= f.submit "タイムライン", id: "followed", class: "indexList" %>
+            <% end %>
+          <% end %>
         </div>
         <div class="col">
           <p>押してください</p>
@@ -29,7 +47,17 @@
       </div>
       <div class="row">
         <div class="col">
-          <button>自分の投稿</button>
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "my" %>
+              <%= f.submit "自分の投稿", id: "my", class: "indexList" %>
+            <% end %>
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "my" %>
+              <%= f.submit "自分の投稿", id: "my", class: "indexList" %>
+            <% end %>
+          <% end %>
         </div>
         <div class="col">
           <p>押してください</p>
@@ -37,7 +65,17 @@
       </div>
       <div class="row">
         <div class="col">
-          <button>コメントした投稿</button>
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "commented" %>
+              <%= f.submit "コメントした投稿", id: "commented", class: "indexList" %>
+            <% end %>
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "commented" %>
+              <%= f.submit "コメントした投稿", id: "commented", class: "indexList" %>
+            <% end %>
+          <% end %>
         </div>
         <div class="col">
           <p>押してください</p>
