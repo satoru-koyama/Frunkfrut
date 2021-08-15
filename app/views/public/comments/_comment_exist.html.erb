@@ -7,7 +7,7 @@
       返信数<%= comment.replies.where(is_deleted: false).count %>
     </p>
     <!--いいねボタン-->
-    <p class="col">
+    <p class="col" id="comment_favorite_<%= comment.id %>">
       <%= render partial: "public/comments/comment_favorite", locals: {comment: comment} %>
     </p>
   </div>
@@ -39,7 +39,7 @@
       </p>
     <% end %>
     <!--報告ボタン-->
-    <p class="col">
+    <p class="col" id="comment_report_<%= comment.id %>">
       <%= render partial: "public/comments/comment_report", locals: {comment: comment} %>
     </p>
     <!--コメント主がログインユーザーの場合に表示-->

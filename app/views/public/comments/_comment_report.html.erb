@@ -1,4 +1,4 @@
-<% if comment.comment_reports.find_by(user_id: current_user.id).nil? && user_signed_in? && current_user.id != comment.user_id %>
+<% if !comment.comment_reports.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != comment.user_id %>
   <%= link_to post_post_reports_path(comment.id), method: :post, remote: true do %>
     報告をする<i class="fas fa-exclamation-triangle" style="color: blue"></i>
   <% end %>

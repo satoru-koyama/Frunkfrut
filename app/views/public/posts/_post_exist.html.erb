@@ -48,7 +48,7 @@
       残り<%= post.countdown %>
     </p>
     <!--報告ボタン-->
-    <p class="col">
+    <p class="col" id="post_report_<%= post.id %>">
       <%= render partial: "public/posts/post_report", locals: {post: post} %>
     </p>
     <!--投稿主がログインユーザーの場合に表示-->
