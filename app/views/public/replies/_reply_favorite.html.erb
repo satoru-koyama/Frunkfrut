@@ -1,10 +1,11 @@
-<% if reply.reply_favorites.find_by(user_id: current_user.id).nil? && user_signed_in? && current_user.id != reply.user_id %>
+<% if !reply.reply_favorites.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != reply.user_id %>
   <%= link_to reply_reply_favorites_path(reply.id), method: :post, remote: true do %>
     いいねを付ける<i class="fas fa-thumbs-up" style="color: blue"></i>
+    <%= reply.reply_favorites.all.count %>
   <% end %>
 <% elsif reply.reply_favorites.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != reply.user_id %>
   <%= link_to reply_reply_favorites_path(reply_id: reply.id), method: :delete, remote: true do %>
     いいねを外す<i class="fas fa-thumbs-up" style="color: red"></i>
+    <%= reply.reply_favorites.all.count %>
   <% end %>
 <% end %>
-<%= reply.reply_favorites.all.count %>

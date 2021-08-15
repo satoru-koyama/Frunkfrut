@@ -1,10 +1,11 @@
 <% if !comment.comment_favorites.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != comment.user_id %>
   <%= link_to comment_comment_favorites_path(comment.id), method: :post, remote: true do %>
     いいねを付ける<i class="fas fa-thumbs-up" style="color: blue"></i>
+    <%= comment.comment_favorites.all.count %>
   <% end %>
 <% elsif comment.comment_favorites.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != comment.user_id %>
   <%= link_to comment_comment_favorites_path(comment_id: comment.id), method: :delete, remote: true do %>
     いいねを外す<i class="fas fa-thumbs-up" style="color: red"></i>
+    <%= comment.comment_favorites.all.count %>
   <% end %>
 <% end %>
-<%= comment.comment_favorites.all.count %>

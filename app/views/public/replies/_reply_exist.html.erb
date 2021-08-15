@@ -3,7 +3,7 @@
     <!--ユーザー情報-->
       <%= render partial: "public/replies/reply_user", locals: {reply: reply} %>
     <!--いいねボタン-->
-    <p class="col">
+    <p class="col" id="reply_favorite_<%= reply.id %>">
       <%= render partial: "public/replies/reply_favorite", locals: {reply: reply} %>
     </p>
   </div>
@@ -31,7 +31,7 @@
       </p>
     <% end %>
     <!--報告ボタン-->
-    <p class="col">
+    <p class="col" id="reply_report_<%= reply.id %>">
       <%= render partial: "public/replies/reply_report", locals: {reply: reply} %>
     </p>
     <!--返信主がログインユーザーの場合に表示-->
