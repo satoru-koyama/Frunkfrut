@@ -4,10 +4,12 @@ class Public::ReplyReportsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @reply_report = ReplyReport.new
-    @reply_report.user_id = current_user.id
-    @reply_report.reply_id = params[:reply_id]
-    @reply_report.save
+    if !ReplyReport.find_by(user_id: current_user.id, reply_id: params[:reply_id])
+      @reply_report = ReplyReport.new
+      @reply_report.user_id = current_user.id
+      @reply_report.reply_id = params[:reply_id]
+      @reply_report.save
+    end
     @reply = Reply.find(params[:reply_id])
   end
 

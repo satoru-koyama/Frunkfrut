@@ -1,0 +1,3 @@
+$("#block_user_<%= @user.id %>").html("<%= j(render partial: 'public/users/block_user', locals: {user: @user}) %>")
+
+$("#block_count").html("<%= j(render partial: 'public/block_relationships/block_count', locals: {}) %>")
