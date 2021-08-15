@@ -7,7 +7,6 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    byebug
     redirect_to user_root_path
   end
 

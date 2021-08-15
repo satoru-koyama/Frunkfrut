@@ -1,0 +1,9 @@
+<div class="container">
+  <% replies.each do |reply| %>
+    <% if reply.is_deleted == false %>
+      <%= render partial: "public/replies/reply_exist", locals: {reply: reply} %>
+    <% elsif reply.is_deleted == true %>
+      <%= render partial: "public/replies/reply_delete", locals: {reply: reply} %>
+    <% end %>
+  <% end %>
+</div>

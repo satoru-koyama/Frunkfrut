@@ -1,3 +1,3 @@
 <%= render partial: 'public/comments/show_comment', locals: { comment: @comment } %>
-<%= render partial: 'public/comments/new_reply', locals: { comment: @comment, reply: @reply } %>
-<%= render partial: 'public/comments/index_reply', locals: { replies: @replies } %>
+<%= render partial: 'public/replies/new_reply', locals: { comment: @comment, reply: @reply } %>
+<%= render partial: 'public/replies/index_reply', locals: { replies: @replies } %>

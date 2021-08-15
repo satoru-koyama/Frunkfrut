@@ -1,0 +1,9 @@
+<% if comment.comment_reports.find_by(user_id: current_user.id).nil? && user_signed_in? && current_user.id != comment.user_id %>
+  <%= link_to post_post_reports_path(comment.id), method: :post, remote: true do %>
+    報告をする<i class="fas fa-exclamation-triangle" style="color: blue"></i>
+  <% end %>
+<% elsif comment.comment_reports.find_by(user_id: current_user.id) && user_signed_in? && current_user.id != comment.user_id %>
+  <%= link_to comment_comment_reports_path(comment_id: comment.id), method: :delete, remote: true do %>
+    報告を取り消す<i class="fas fa-exclamation-triangle" style="color: red"></i>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 <%= render partial: 'public/posts/show_post', locals: { post: @post } %>
 <% if user_signed_in? %>
-  <%= render partial: 'public/posts/new_comment', locals: { post: @post, comment: @comment } %>
+  <%= render partial: 'public/comments/new_comment', locals: { post: @post, comment: @comment } %>
 <% end %>
-<%= render partial: 'public/posts/index_comment', locals: { comments: @comments } %>
+<%= render partial: 'public/comments/index_comment', locals: { comments: @comments } %>

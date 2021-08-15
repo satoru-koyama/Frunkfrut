@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button class="post_index_list_btn">投稿一覧</button>
+      <button id="post_index_list_btn">投稿一覧</button>
     </div>
     <div class="col">
       <p>投稿してください</p>
     </div>
   </div>
-  <div class="post_index_list">
+  <div id="post_index_list">
     <div class="row">
       <div class="col">
         <% if request.url == user_root_post_path %>
