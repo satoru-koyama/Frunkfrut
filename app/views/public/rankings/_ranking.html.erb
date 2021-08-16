@@ -1,0 +1,5 @@
+<% if id == "top100_ranking" %>
+  <%= render partial: "public/rankings/top100_ranking", locals: {rankings: rankings} %>
+<% elsif id == "my_ranking" %>
+  <%= render partial: "public/rankings/my_ranking", locals: {ranking: rankings} %>
+<% end %>

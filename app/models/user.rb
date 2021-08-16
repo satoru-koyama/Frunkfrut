@@ -89,5 +89,19 @@ class User < ApplicationRecord
     super && (self.is_deleted == false)
   end
 
+  # 一週間のいいね数のランキングの順位を返す
+  def week_ranking_rank
+    rank = Ranking.where("week_count > ?", self.week_count).count
+    return rank
+  end
+
+  # 一週間のいいね数のランキングで上から何番目かを返す
+  # ただし、いいね数が同じユーザーがもう一人いる場合は、shuffle_idの大きいユーザーを上に並べる
+  def week_ranking_count
+    shuffle_id = Ranking.find_by(user_id: self.id).shuffle_id
+    count = Ranking.where("(week_count > ?) || ((week_count = ?) && (shuffle_id > ?))", self.week_count, self.week_count, shuffle_id).count
+    return count
+  end
+
 
 end
