@@ -10,11 +10,13 @@
   <div id="post_index_list">
     <div class="row">
       <div class="col">
+        <!--現在のURLがuser_root_post_pathと一致している場合-->
         <% if request.url == user_root_post_path %>
           <%= form_with url: user_root_post_path, remote: true do |f| %>
             <%= hidden_field_tag :id, "new" %>
             <%= f.submit "新着一覧" %>
           <% end %>
+        <!--現在のURLがuser_root_post_pathと一致していない場合-->
         <% elsif request.url != user_root_post_path %>
           <%= form_with url: user_root_post_path, local: true do |f| %>
             <%= hidden_field_tag :id, "new" %>
@@ -26,14 +28,17 @@
         <p>押してください</p>
       </div>
     </div>
+    <!--ユーザーがログインしている時だけ表示-->
     <% if user_signed_in? %>
       <div class="row">
         <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
             <%= form_with url: user_root_post_path, remote: true do |f| %>
               <%= hidden_field_tag :id, "followed" %>
               <%= f.submit "タイムライン" %>
             <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
             <%= form_with url: user_root_post_path, local: true do |f| %>
               <%= hidden_field_tag :id, "followed" %>
@@ -47,11 +52,13 @@
       </div>
       <div class="row">
         <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
             <%= form_with url: user_root_post_path, remote: true do |f| %>
               <%= hidden_field_tag :id, "my" %>
               <%= f.submit "自分の投稿" %>
             <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
             <%= form_with url: user_root_post_path, local: true do |f| %>
               <%= hidden_field_tag :id, "my" %>
@@ -65,11 +72,13 @@
       </div>
       <div class="row">
         <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
             <%= form_with url: user_root_post_path, remote: true do |f| %>
               <%= hidden_field_tag :id, "commented" %>
               <%= f.submit "コメントした投稿" %>
             <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
             <%= form_with url: user_root_post_path, local: true do |f| %>
               <%= hidden_field_tag :id, "commented" %>

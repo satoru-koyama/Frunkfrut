@@ -35,5 +35,5 @@ every 1.minute do
 end
 
 every 1.minute do
-  rake "ranking_create"
+  rake "ranking_create:create"
 end

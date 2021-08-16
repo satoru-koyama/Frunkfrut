@@ -14,24 +14,29 @@ class Public::PostsController < ApplicationController
     if params[:id] == "new"
       start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
       @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+      @id = params[:id]
 
     elsif params[:id] =="followed"
       @posts = current_user.followed_user_posts.order(id: :DESC)
+      @id = params[:id]
 
     elsif params[:id] == "my"
       @posts = current_user.posts.order(id: :DESC)
-
+      @id = params[:id]
 
     elsif params[:id] == "commented"
       @posts = current_user.commented_posts.order(id: :DESC)
+      @id = params[:id]
 
     elsif request.referer == user_root_path
       start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
       @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+      @id = "new"
 
     elsif request.referer != user_root_path
       start_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
       @posts = Post.where("created_at > ?", start_time ).order(id: :DESC)
+      @id = "new"
     end
   end
 

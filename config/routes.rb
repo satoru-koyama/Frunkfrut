@@ -40,8 +40,8 @@ Rails.application.routes.draw do
     get "/ranking", to: "rankings#ranking", as: :ranking
     post "/ranking", to: "rankings#ranking", as: :ranking_post
 
-    get "/posts", to: "posts#index", as: :user_root
-    post "/posts", to: "posts#index", as: :user_root_post
+    get "/top", to: "posts#index", as: :user_root
+    post "/top", to: "posts#index", as: :user_root_post
     resources "posts", only: [:show, :create, :update] do
       member do
         patch "delete"

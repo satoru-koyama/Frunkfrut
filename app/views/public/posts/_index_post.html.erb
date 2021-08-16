@@ -1,9 +1,22 @@
 <div class="container">
-  <% posts.each do |post| %>
-    <% if post.is_deleted == false %>
-      <%= render partial: "public/posts/post_exist", locals: {post: post} %>
-    <% elsif post.is_deleted == true && (post.comments.find_by(is_deleted: false) || post.replies.find_by(is_deleted: false)) %>
-      <%= render partial: "public/posts/post_delete", locals: {post: post} %>
+  <div class="row">
+    <div class="col">
+      <% if id == "new" %>
+        <h3>新着一覧</h3>
+      <% elsif id == "followed" %>
+        <h3>タイムライン</h3>
+      <% elsif id == "my" %>
+        <h3>自分の投稿</h3>
+      <% elsif id == "commented" %>
+        <h3>過去にコメントした投稿</h3>
+      <% end %>
+    </div>
+  </div>
+    <% posts.each do |post| %>
+      <% if post.is_deleted == false %>
+        <%= render partial: "public/posts/post_exist", locals: {post: post} %>
+      <% elsif post.is_deleted == true && (post.comments.find_by(is_deleted: false) || post.replies.find_by(is_deleted: false)) %>
+        <%= render partial: "public/posts/post_delete", locals: {post: post} %>
+      <% end %>
     <% end %>
-  <% end %>
 </div>

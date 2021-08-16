@@ -91,7 +91,7 @@ class User < ApplicationRecord
 
   # 一週間のいいね数のランキングの順位を返す
   def week_ranking_rank
-    rank = Ranking.where("week_count > ?", self.week_count).count
+    rank = Ranking.where("week_count > ?", self.week_count).count + 1
     return rank
   end
 
@@ -99,7 +99,7 @@ class User < ApplicationRecord
   # ただし、いいね数が同じユーザーがもう一人いる場合は、shuffle_idの大きいユーザーを上に並べる
   def week_ranking_count
     shuffle_id = Ranking.find_by(user_id: self.id).shuffle_id
-    count = Ranking.where("(week_count > ?) || ((week_count = ?) && (shuffle_id > ?))", self.week_count, self.week_count, shuffle_id).count
+    count = Ranking.where("(week_count > ?) OR ((week_count = ?) AND (shuffle_id > ?))", self.week_count, self.week_count, shuffle_id).count
     return count
   end
 
