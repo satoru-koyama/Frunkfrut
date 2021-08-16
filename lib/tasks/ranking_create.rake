@@ -38,9 +38,9 @@ namespace :ranking_create do
     numbers.each do |number|
       id += 1
       ranking = Ranking.find(id)
-      ranking.update(shuffle_id: number)
+      ranking.shuffle_id = number
+      ranking.save
     end
-
   end
 
 end

@@ -17,7 +17,7 @@ class Public::RankingsController < ApplicationController
       above20_my_ranking = Ranking.where("(week_count > ?) or ( (week_count = ?) and (shuffle_id > ?) )", current_user.week_count, current_user.week_count, shuffle_id)
       # 並び替えて、自分の上に並べる２０のレコードのみにする
       above20_my_ranking = above20_my_ranking.order(week_count: :ASC, shuffle_id: :ASC).limit(20)
-      above20_my_ranking = above20_my_ranking.order(week_count: :DESC, shuffle_id: :DESC)
+      above20_my_ranking = above20_my_ranking.reverse_order
 
       # 自身の下に並んでいるレコードを取得する
       below20_my_ranking = Ranking.where("(week_count < ?) or ( (week_count = ?) and (shuffle_id < ?) )", current_user.week_count, current_user.week_count, shuffle_id)
@@ -28,7 +28,7 @@ class Public::RankingsController < ApplicationController
       my_ranking = Ranking.find_by(user_id: current_user.id)
 
       # レコードを結合させる
-      @rankings = above20_my_ranking + [my_ranking] + below20_my_ranking
+      @rankings = {above20_my_ranking: above20_my_ranking, my_ranking: my_ranking, below20_my_ranking: below20_my_ranking}
       @id = "my_ranking"
 
     # HTTPメソッドがpostでない場合

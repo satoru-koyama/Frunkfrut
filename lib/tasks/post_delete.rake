@@ -12,7 +12,6 @@ namespace :post_delete do
     limit_time = Time.zone.now - ( 60 * 60 * 24 * 3 )
     posts = Post.where("(created_at < ?) AND (is_deleted = ?)", limit_time, false)
 
-
     posts.each do |post|
       # begin
         post.update!(is_deleted: true)
