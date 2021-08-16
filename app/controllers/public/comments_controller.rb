@@ -14,18 +14,24 @@ class Public::CommentsController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     @reply = Reply.new
-    @replies = Reply.all
+    @replies = @comment.replies.order(id: :DESC)
   end
 
   def update
+    @comment = Comment.find(params[:id])
+    @comment.update(comment_params)
+    redirect_to request.referer
   end
 
   def delete
+    @comment = Comment.find(params[:id])
+    @comment.update(is_deleted: true)
+    redirect_to request.referer
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:text, :comment_image)
+    params.require(:comment).permit(:text, :image)
   end
 
 

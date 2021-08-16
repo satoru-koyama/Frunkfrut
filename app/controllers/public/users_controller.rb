@@ -11,9 +11,11 @@ class Public::UsersController < ApplicationController
   end
 
   def follow
+    @users = current_user.followed_users.order(:name)
   end
 
   def block
+    @users = current_user.blocked_users.order(:name)
   end
 
   def my_page

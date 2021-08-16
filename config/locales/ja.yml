@@ -142,3 +142,10 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+
+# 日時の表示形式を日本人が読みやすいフォーマットに変更
+ja:
+  time:
+    formats:
+      default: "%m/%d %H:%M"
+      long: "%Y/%m/%d %H:%M:%S"

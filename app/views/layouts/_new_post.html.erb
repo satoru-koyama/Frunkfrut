@@ -1,19 +1,19 @@
-<div class="container">
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
+  <div class="container">
     <div class="row">
       <div class="col">
-        <button>新規投稿</button>
+        <button id="new_post_btn">新規投稿</button>
       </div>
       <div class="col">
         <p>投稿してください</p>
       </div>
     </div>
-    <div class="row">
-      <%= form_with model: post, url: posts_path, method: :post, local: true, class:"col" do |f| %>
+    <div class="row" id="new_post">
+      <%= form_with model: post, url: posts_path, method: :post, local: true, class: "col" do |f| %>
         <%= f.text_field :text %>
-        <%= f.file_field :post_image %>
+        <%= f.file_field :image %>
         <%= f.submit "送信" %>
       <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

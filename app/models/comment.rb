@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
 
-  attachment :comment_image
+  attachment :image
 
   # 関連付け
   belongs_to :post
@@ -10,6 +10,6 @@ class Comment < ApplicationRecord
   has_many :comment_favorites, dependent: :destroy
 
   # バリデーション
-  validates :text, presence: true, unless: :comment_image
-  validates :comment_image, presence: true, unless: :text
+  validates :text, presence: true, unless: :image
+  validates :image, presence: true, unless: :text
 end

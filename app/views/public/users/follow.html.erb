@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>フォロー一覧</h3>
+    </div>
+    <div class="col" id="follow_count">
+      <!--フォロー数-->
+      <%= render partial: 'public/follow_relationships/follow_count', locals: {} %>
+    </div>
+  </div>
+  <div>
+    <% @users.each do |user| %>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <!--投稿主画像-->
+            <%= link_to user_path(user.id) do %>
+              <div class="col">
+                <%= attachment_image_tag user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+              </div>
+            <% end %>
+            <!--投稿主ニックネーム-->
+            <%= link_to user_path(user.id) do %>
+              <p class="col">
+                <% if user.nickname.blank? %>
+                  no name
+                <% else %>
+                  <%= user.nickname %>
+                <% end %>
+              </p>
+            <% end %>
+            <!--フォローボタン-->
+            <div class="col" id="follow_user_<%= user.id %>">
+              <%= render partial: 'public/users/follow_user', locals: {user: user} %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

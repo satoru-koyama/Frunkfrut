@@ -1,6 +1,6 @@
 class Reply < ApplicationRecord
 
-  attachment :reply_image
+  attachment :image
 
   # 関連付け
   belongs_to :comment
@@ -9,7 +9,7 @@ class Reply < ApplicationRecord
   has_many :reply_favorites, dependent: :destroy
 
   # バリデーション
-  validates :text, presence: true, unless: :reply_image
-  validates :reply_image, presence: true, unless: :text
+  validates :text, presence: true, unless: :image
+  validates :image, presence: true, unless: :text
 
 end

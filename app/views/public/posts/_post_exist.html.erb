@@ -1,0 +1,77 @@
+<div>
+  <div class="row">
+    <!--投稿ユーザー-->
+    <%= render partial: "public/posts/post_user", locals: {post: post} %>
+    <!--コメント数-->
+    <p class="col">
+      コメント数<%= post.comments.where(is_deleted: false).count %>
+    </p>
+    <!--いいねボタン-->
+    <p class="col" id="post_favorite_<%= post.id %>">
+      <%= render partial: "public/posts/post_favorite", locals: {post: post} %>
+    </p>
+  </div>
+  <div class="row">
+    <!--投稿テキスト-->
+    <div class="col">
+      <%= link_to post_path(post.id) do %>
+        <p id="post-label-<%= post.id %>">
+          <%= post.text %>
+        </p>
+      <% end %>
+      <%= link_to post_path(post.id) do %>
+        <div class="row">
+          <!--投稿画像-->
+          <div class="col">
+            <%= attachment_image_tag post, :image, :fill, 400, 250, format: 'jpg' %>
+          </div>
+        </div>
+      <% end %>
+      <!--編集フォーム-->
+      <textarea id="textarea-post-<%= post.id %>" class="form-post-<%= post.id %> form-post"><%= post.text %></textarea>
+      <input type="file" id="file-post-<%= post.id %>" class="form-post-<%= post.id %> form-post">
+    </div>
+  </div>
+  <div class="row">
+    <!--投稿日時-->
+    <p class="col">
+      投稿日時<%= l post.created_at %>
+    </p>
+    <% if post.updated_at != post.created_at %>
+      <!--更新日時-->
+      <p class="col">
+        更新日時<%= l post.updated_at %>
+      </p>
+    <% end %>
+    <!--残り時間-->
+    <p class="col">
+      残り<%= post.countdown %>
+    </p>
+    <!--報告ボタン-->
+    <p class="col" id="post_report_<%= post.id %>">
+      <%= render partial: "public/posts/post_report", locals: {post: post} %>
+    </p>
+    <!--投稿主がログインユーザーの場合に表示-->
+    <% if post.user_id == current_user.id %>
+      <div class="col post-before-button-<%= post.id %>">
+        <!--編集ボタン-->
+        <button data-post-id=<%= post.id %> class="edit-post-button">編集する</button>
+      </div>
+      <div class="col post-before-button-<%= post.id %>">
+        <!--編集ボタン-->
+        <%= link_to delete_post_path(post.id), method: :patch do %>
+          <!--削除ボタン-->
+          <button>削除する</button>
+        <% end %>
+      </div>
+      <div class="col post-after-button post-after-button-<%= post.id %>">
+        <!--更新するボタン-->
+        <button data-update-id=<%= post.id%> type="submit" class="post-update-button">更新する</button>
+      </div>
+      <div class="col post-after-button post-after-button-<%= post.id %>">
+        <!--編集キャンセルボタン-->
+        <button data-cancel-id=<%= post.id %> type="button"  class="post-cancel-button">キャンセルする</button>
+      </div>
+    <% end %>
+  </div>
+</div>

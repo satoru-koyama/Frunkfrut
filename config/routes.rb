@@ -37,7 +37,11 @@ Rails.application.routes.draw do
 
     get "/about", to: "homes#about", as: :about
 
-    get "/posts", to: "posts#index", as: :user_root
+    get "/ranking", to: "rankings#ranking", as: :ranking
+    post "/ranking", to: "rankings#ranking", as: :ranking_post
+
+    get "/top", to: "posts#index", as: :user_root
+    post "/top", to: "posts#index", as: :user_root_post
     resources "posts", only: [:show, :create, :update] do
       member do
         patch "delete"
@@ -71,7 +75,6 @@ Rails.application.routes.draw do
         get "block"
         get "follow"
         get "my_page"
-        get "ranking"
       end
       resource "follow_relationships", only: [:create, :destroy]
       resource "block_relationships", only: [:create, :destroy]

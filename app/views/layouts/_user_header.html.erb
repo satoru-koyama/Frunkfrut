@@ -1,25 +1,33 @@
 <div class="container">
   <div class="row">
-    <div class="col"><h2>Frunkfrut</h2></div>
+    <div class="col">
+      <%= link_to top_path do %>
+        <h2>Frunkfrut</h2>
+      <% end %>
+    </div>
     <div class="col">
       <div class="row">
-        <div class="col">
-          <%= attachment_image_tag current_user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
-        </div>
-        <p class="col">
-          <% if current_user.nickname.blank? %>
-            no name
-          <% else %>
-            <%= current_user.nickname %>
-          <% end %>
-        </p>
+        <%= link_to user_path(current_user.id) do %>
+          <div class="col">
+            <%= attachment_image_tag current_user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+          </div>
+        <% end %>
+        <%= link_to user_path(current_user.id) do %>
+          <p class="col">
+            <% if current_user.nickname.blank? %>
+              no name
+            <% else %>
+              <%= current_user.nickname %>
+            <% end %>
+          </p>
+        <% end %>
         <li class="col", style="display: inline"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
       </div>
       <div class="row">
         <li class="col", style="display: inline"><%= link_to "サイト紹介", about_path %></li>
         <li class="col", style="display: inline"><%= link_to "マイページ", my_page_users_path %></li>
         <li class="col", style="display: inline"><%= link_to "フォロ一覧", follow_users_path %></li>
-        <li class="col", style="display: inline"><%= link_to "ランキング", ranking_users_path %></li>
+        <li class="col", style="display: inline"><%= link_to "ランキング", ranking_path %></li>
       </div>
     </div>
   </div>

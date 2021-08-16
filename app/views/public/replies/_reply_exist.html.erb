@@ -1,0 +1,57 @@
+<div>
+  <div class="row">
+    <!--ユーザー情報-->
+      <%= render partial: "public/replies/reply_user", locals: {reply: reply} %>
+    <!--いいねボタン-->
+    <p class="col" id="reply_favorite_<%= reply.id %>">
+      <%= render partial: "public/replies/reply_favorite", locals: {reply: reply} %>
+    </p>
+  </div>
+  <div class="row">
+    <!--返信テキスト-->
+    <p class="col">
+      <%= reply.text %>
+    </p>
+  </div>
+  <div class="row">
+    <!--返信画像-->
+    <div class="col">
+      <%= attachment_image_tag reply, :image, :fill, 400, 250, format: 'jpg' %>
+    </div>
+  </div>
+  <div class="row">
+    <!--返信日時-->
+    <p class="col">
+      返信日時<%= l reply.created_at %>
+    </p>
+    <% if reply.updated_at != reply.created_at %>
+      <!--更新日時-->
+      <p class="col">
+        更新日時<%= l reply.updated_at %>
+      </p>
+    <% end %>
+    <!--報告ボタン-->
+    <p class="col" id="reply_report_<%= reply.id %>">
+      <%= render partial: "public/replies/reply_report", locals: {reply: reply} %>
+    </p>
+    <!--返信主がログインユーザーの場合に表示-->
+    <% if reply.user_id == current_user.id %>
+      <!--編集ボタン-->
+      <div class="col">
+        <button>編集する</button>
+      </div>
+        <!--更新するボタン-->
+        <div class="col">
+          <%= link_to comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch do %>
+            <button>更新する</button>
+          <% end %>
+        </div>
+      <!--取り消すボタン-->
+      <div class="col">
+        <%= link_to delete_comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch do %>
+          <button>取り消す</button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

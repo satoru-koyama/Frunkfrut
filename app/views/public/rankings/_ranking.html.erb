@@ -1,0 +1,19 @@
+<% if id == "top100_ranking" %>
+  <div class="row">
+    <div class="col">
+      <h3>トップ100位</h3>
+    </div>
+  </div>
+  <div>
+    <%= render partial: "public/rankings/top100_ranking", locals: {rankings: rankings} %>
+  </div>
+<% elsif id == "my_ranking" %>
+  <div class="row">
+    <div class="col">
+      <h3>自分のランキング</h3>
+    </div>
+  </div>
+  <div>
+    <%= render partial: "public/rankings/my_ranking", locals: {rankings: rankings} %>
+  </div>
+<% end %>

@@ -1,0 +1,65 @@
+<% rankings[:above20_my_ranking].each do |ranking| %>
+  <div>
+    <div class="row">
+      <div class="col">
+        <h4><%= ranking.user.week_ranking_rank %>位</h4>
+      </div>
+      <div class="col">
+        <%= attachment_image_tag current_user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+      </div>
+      <div class="col">
+        <% if ranking.user.nickname.blank? %>
+          <p>no name</p>
+        <% else %>
+          <p><%= ranking.user.nickname %></p>
+        <% end %>
+      </div>
+      <div>
+        <p>今週のいいね数<%= ranking.user.week_count %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% ranking = rankings[:my_ranking] %>
+<div>
+  <div class="row" style="background-color: yellow">
+    <div class="col">
+      <h4><%= ranking.user.week_ranking_rank %>位</h4>
+    </div>
+    <div class="col">
+      <%= attachment_image_tag current_user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+    </div>
+    <div class="col">
+      <% if ranking.user.nickname.blank? %>
+        <p>no name</p>
+      <% else %>
+        <p><%= ranking.user.nickname %></p>
+      <% end %>
+    </div>
+    <div>
+      <p>今週のいいね数<%= ranking.user.week_count %></p>
+    </div>
+  </div>
+</div>
+<% rankings[:below20_my_ranking].each do |ranking| %>
+  <div>
+    <div class="row">
+      <div class="col">
+        <h4><%= ranking.user.week_ranking_rank %>位</h4>
+      </div>
+      <div class="col">
+        <%= attachment_image_tag current_user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+      </div>
+      <div class="col">
+        <% if ranking.user.nickname.blank? %>
+          <p>no name</p>
+        <% else %>
+          <p><%= ranking.user.nickname %></p>
+        <% end %>
+      </div>
+      <div>
+        <p>今週のいいね数<%= ranking.user.week_count %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+$("#comment_favorite_<%= @comment.id %>").html("<%= j(render partial: 'public/comments/comment_favorite', locals: {comment: @comment}) %>")

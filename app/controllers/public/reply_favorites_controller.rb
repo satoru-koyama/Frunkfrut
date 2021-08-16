@@ -4,16 +4,19 @@ class Public::ReplyFavoritesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @reply_favorite = ReplyFavorite.new
-    @reply_favorite.user_id = current_user.id
-    @reply_favorite.reply_id = params[:reply_id]
-    @reply_favorite.save
-    redirect_to request.referer
+    if !ReplyFavorite.find_by(user_id: current_user.id, reply_id: params[:reply_id])
+      @reply_favorite = ReplyFavorite.new
+      @reply_favorite.user_id = current_user.id
+      @reply_favorite.reply_id = params[:reply_id]
+      @reply_favorite.save
+    end
+    @reply = Reply.find(params[:reply_id])
   end
 
   def destroy
     @reply_favorite = ReplyFavorite.find_by(user_id: current_user.id, reply_id: params[:reply_id])
-    redirect_to request.referer
+    @reply_favorite.destroy
+    @reply = Reply.find(params[:reply_id])
   end
 
 end

@@ -1,44 +1,95 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button>投稿一覧</button>
+      <button id="post_index_list_btn">投稿一覧</button>
     </div>
     <div class="col">
       <p>投稿してください</p>
     </div>
   </div>
-  <div>
+  <div id="post_index_list">
     <div class="row">
       <div class="col">
-        <button>新着一覧</button>
+        <!--現在のURLがuser_root_post_pathと一致している場合-->
+        <% if request.url == user_root_post_path %>
+          <%= form_with url: user_root_post_path, remote: true do |f| %>
+            <%= hidden_field_tag :id, "new" %>
+            <%= f.submit "新着一覧" %>
+          <% end %>
+        <!--現在のURLがuser_root_post_pathと一致していない場合-->
+        <% elsif request.url != user_root_post_path %>
+          <%= form_with url: user_root_post_path, local: true do |f| %>
+            <%= hidden_field_tag :id, "new" %>
+            <%= f.submit "新着一覧" %>
+          <% end %>
+        <% end %>
       </div>
       <div class="col">
         <p>押してください</p>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <button>タイムライン</button>
+    <!--ユーザーがログインしている時だけ表示-->
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "followed" %>
+              <%= f.submit "タイムライン" %>
+            <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "followed" %>
+              <%= f.submit "タイムライン" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-      <div class="col">
-        <p>押してください</p>
+      <div class="row">
+        <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "my" %>
+              <%= f.submit "自分の投稿" %>
+            <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "my" %>
+              <%= f.submit "自分の投稿" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button>自分の投稿</button>
+      <div class="row">
+        <div class="col">
+          <!--現在のURLがuser_root_post_pathと一致している場合-->
+          <% if request.url == user_root_post_path %>
+            <%= form_with url: user_root_post_path, remote: true do |f| %>
+              <%= hidden_field_tag :id, "commented" %>
+              <%= f.submit "コメントした投稿" %>
+            <% end %>
+          <!--現在のURLがuser_root_post_pathと一致していない場合-->
+          <% elsif request.url != user_root_post_path %>
+            <%= form_with url: user_root_post_path, local: true do |f| %>
+              <%= hidden_field_tag :id, "commented" %>
+              <%= f.submit "コメントした投稿" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col">
+          <p>押してください</p>
+        </div>
       </div>
-      <div class="col">
-        <p>押してください</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button>コメントした投稿</button>
-      </div>
-      <div class="col">
-        <p>押してください</p>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

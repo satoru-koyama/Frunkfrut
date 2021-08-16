@@ -1,0 +1,20 @@
+<div>
+  <div class="row">
+    <!--返信テキスト-->
+    <%= link_to comment_reply_path(comment_id: reply.comment_id, id: reply.id) do %>
+      <p class="col">
+      削除されました。
+      </p>
+    <% end %>
+  </div>
+  <div class="row">
+    <!--返信日時-->
+    <p class="col">
+      返信日時<%= l reply.created_at %>
+    </p>
+    <!--削除日時-->
+    <p class="col">
+      削除日時<%= l reply.updated_at %>
+    </p>
+  </div>
+</div>
