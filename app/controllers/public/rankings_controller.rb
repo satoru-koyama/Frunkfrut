@@ -14,13 +14,13 @@ class Public::RankingsController < ApplicationController
     elsif (params[:id] == "my_ranking")
       shuffle_id = Ranking.find_by(user_id: current_user.id).shuffle_id
       # 自身の上に並んでいるレコードを取得する
-      above20_my_ranking = Ranking.where("(week_count > ?) OR ((week_count = ?) AND (shuffle_id > ?))", current_user.week_count, current_user.week_count, shuffle_id)
+      above20_my_ranking = Ranking.where("(week_count > ?) or ( (week_count = ?) and (shuffle_id > ?) )", current_user.week_count, current_user.week_count, shuffle_id)
       # 並び替えて、自分の上に並べる２０のレコードのみにする
       above20_my_ranking = above20_my_ranking.order(week_count: :ASC, shuffle_id: :ASC).limit(20)
       above20_my_ranking = above20_my_ranking.order(week_count: :DESC, shuffle_id: :DESC)
 
       # 自身の下に並んでいるレコードを取得する
-      below20_my_ranking = Ranking.where("(week_count < ?) OR ((week_count = ?) AND (shuffle_id < ?))", current_user.week_count, current_user.week_count, shuffle_id)
+      below20_my_ranking = Ranking.where("(week_count < ?) or ( (week_count = ?) and (shuffle_id < ?) )", current_user.week_count, current_user.week_count, shuffle_id)
       # 並び替えて、自分の下に並べる２０のレコードのみにする
       below20_my_ranking = below20_my_ranking.order(week_count: :DESC, shuffle_id: :DESC).limit(20)
 
