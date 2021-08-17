@@ -1,2 +1,2 @@
 <!--部分テンプレートだけを更新させる-->
-$('.post_index').html("#{j(render partial: 'public/posts/index_post', locals: { posts: @posts, id: @id })}");
+$('.post_index').html("<% j(render partial: 'public/posts/index_post', locals: { posts: @posts, id: @id }) %>");

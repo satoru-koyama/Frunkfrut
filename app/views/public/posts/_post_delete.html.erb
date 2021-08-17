@@ -1,30 +1,32 @@
-<div>
-  <div class="row">
-    <!--コメント数-->
-    <p class="col">
-      コメント数<%= post.comments.where(is_deleted: false).count %>
-    </p>
-  </div>
-  <div class="row">
-    <%= link_to post_path(post.id) do %>
-      <!--投稿テキスト-->
-      <p class="col">
-        削除されました。
+<div class="row">
+  <div class="col">
+    <div>
+      <!--コメント数-->
+      <p class="inline-block">
+        コメント数<%= post.comments.where(is_deleted: false).count %>
       </p>
-    <% end %>
-  </div>
-  <div class="row">
-    <!--投稿日時-->
-    <p class="col">
-      投稿日時<%= l post.created_at %>
-    </p>
-    <!--削除日時-->
-    <p class="col">
-      削除日時<%= l post.updated_at %>
-    </p>
-    <!--残り時間-->
-    <p class="col">
-      残り<%= post.countdown %>
-    </p>
+    </div>
+    <div>
+      <%= link_to post_path(post.id) do %>
+        <!--投稿テキスト-->
+        <p class="inline-block">
+          削除されました。
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <!--投稿日時-->
+      <p class="inline-block">
+        投稿日時<%= l post.created_at %>
+      </p>
+      <!--削除日時-->
+      <p class="inline-block">
+        削除日時<%= l post.updated_at %>
+      </p>
+      <!--残り時間-->
+      <p class="inline-block">
+        残り<%= post.countdown %>
+      </p>
+    </div>
   </div>
 </div>
