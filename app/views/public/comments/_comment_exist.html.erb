@@ -31,10 +31,10 @@
         </div>
 
         <!--編集フォーム-->
-        <div class="comment_update post_update_<%= comment.id %>">
+        <div class="comment_update comment_update_<%= comment.id %>">
           <%= f.text_area :text, value: comment.text, size: "120x10" %>
         </div>
-        <div class="comment_update post_update_<%= comment.id %>">
+        <div class="comment_update comment_update_<%= comment.id %>">
           <%= f.file_field :image, value: comment.image %>
         </div>
       </div>

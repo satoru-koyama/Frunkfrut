@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button>コメント</button>
+      <button id="new_comment_btn">コメント</button>
     </div>
-    <div class="col">
+    <div class="col ">
       <p class="col">コメントしてください</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" id="new_comment">
     <%= form_with model: comment, url: post_comments_path(post.id), method: :post, local: true, class: "col" do |f| %>
       <%= f.text_field :text %>
       <%= f.file_field :image %>
