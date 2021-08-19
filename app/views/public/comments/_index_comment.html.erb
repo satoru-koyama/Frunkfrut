@@ -1,7 +1,9 @@
 <div class="container">
   <% comments.each do |comment| %>
     <% if comment.is_deleted == false %>
-      <%= render partial: "public/comments/comment_exist", locals: {comment: comment} %>
+      <div id="comment_<%= comment.id %>">
+        <%= render partial: "public/comments/comment_exist", locals: {comment: comment} %>
+      </div>
     <% elsif comment.is_deleted == true && comment.replies.find_by(is_deleted: false) %>
       <%= render partial: "public/comments/comment_delete", locals: {comment: comment} %>
     <% end %>

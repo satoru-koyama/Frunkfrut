@@ -73,12 +73,11 @@
             <div class="inline-block post_edit_<%= post.id %>">
               <!--編集ボタン-->
               <button type="button" id="post_edit_button_<%= post.id %>" class="post_edit_button">編集する</button>
-
             </div>
             <div class="inline-block post_edit_<%= post.id %>">
               <!--削除ボタン-->
               <%= link_to delete_post_path(post.id), method: :patch do %>
-                <button  type="button">削除する</button>
+                <button type="button">削除する</button>
               <% end %>
             </div>
             <div class="inline-block post_update post_update_<%= post.id %>">
