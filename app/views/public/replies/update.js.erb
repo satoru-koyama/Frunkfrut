@@ -1,0 +1,22 @@
+<!--部分テンプレートだけを更新させる-->
+$('#reply_<%= @reply.id %>').html("<%= j(render partial: "public/replies/reply_exist", locals: {reply: @reply}) %>");
+
+$('.reply_update').hide();
+
+$('.reply_edit_button').on('click',  function(){
+    const replyId = $(this).attr('id').replace(/[^0-9]/g, '');
+    const replyEdit = $('.reply_edit_' + replyId);
+    const replyUpdate = $('.reply_update_' + replyId);
+
+    replyEdit.hide();
+    replyUpdate.show();
+})
+
+$(document).on("click", ".reply_cancel_button", function () {
+  const replyId = $(this).attr('id').replace(/[^0-9]/g, '');
+  const replyEdit = $('.reply_edit_' + replyId);
+  const replyUpdate = $('.reply_update_' + replyId);
+
+  replyEdit.show();
+  replyUpdate.hide();
+});

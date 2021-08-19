@@ -1,0 +1,22 @@
+<!--部分テンプレートだけを更新させる-->
+$('#comment_<%= @comment.id %>').html("<%= j(render partial: "public/comments/comment_exist", locals: {comment: @comment}) %>");
+
+$('.comment_update').hide();
+
+$('.comment_edit_button').on('click',  function(){
+    const commentId = $(this).attr('id').replace(/[^0-9]/g, '');
+    const commentEdit = $('.comment_edit_' + commentId);
+    const commentUpdate = $('.comment_update_' + commentId);
+
+    commentEdit.hide();
+    commentUpdate.show();
+})
+
+$(document).on("click", ".comment_cancel_button", function () {
+  const commentId = $(this).attr('id').replace(/[^0-9]/g, '');
+  const commentEdit = $('.comment_edit_' + commentId);
+  const commentUpdate = $('.comment_update_' + commentId);
+
+  commentEdit.show();
+  commentUpdate.hide();
+});

@@ -1,26 +1,28 @@
-<div>
-  <div class="row">
-    <!--返信数-->
-    <p class="col">
-      返信数<%= comment.replies.where(is_deleted: false).count %>
-    </p>
-  </div>
-  <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id) do %>
-    <div class="row">
-      <!--コメントテキスト-->
-      <p class="col">
-        削除されました。
+<div class="row">
+  <div class="col">
+    <div>
+      <!--返信数-->
+      <p class="inline-block">
+        返信数<%= comment.replies.where(is_deleted: false).count %>
       </p>
     </div>
-  <% end %>
-  <div class="row">
-    <!--コメント日時-->
-    <p class="col">
-      コメント日時<%= l comment.created_at %>
-    </p>
-    <!--削除日時-->
-    <p class="col">
-      削除日時<%= l comment.updated_at %>
-    </p>
+    <div>
+      <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id) do %>
+        <!--コメントテキスト-->
+        <p class="inline-block">
+          削除されました。
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <!--コメント日時-->
+      <p class="inline-block">
+        コメント日時<%= l comment.created_at %>
+      </p>
+      <!--削除日時-->
+      <p class="inline-block">
+        削除日時<%= l comment.updated_at %>
+      </p>
+    </div>
   </div>
 </div>
