@@ -1,0 +1,22 @@
+<!--部分テンプレートだけを更新させる-->
+$('#user_<%= @user.id %>').html("<%= j(render partial: "public/users/show_user", locals: {user: @user}) %>");
+
+$('.user_update').hide();
+
+$('.user_edit_button').on('click',  function(){
+    const userId = $(this).attr('id').replace(/[^0-9]/g, '');
+    const userEdit = $('.user_edit_' + userId);
+    const userUpdate = $('.user_update_' + userId);
+
+    postEdit.hide();
+    postUpdate.show();
+})
+
+$(document).on("click", ".post_cancel_button", function () {
+  const userId = $(this).attr('id').replace(/[^0-9]/g, '');
+  const userEdit = $('.user_edit_' + userId);
+  const userUpdate = $('.user_update_' + userId);
+
+  userEdit.show();
+  userUpdate.hide();
+});

@@ -1,0 +1,67 @@
+<%= form_with model: user, url: user_path(user.id), method: :patch, remote: true do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>アカウント情報</h3>
+        <div>
+          <h4>アカウント画像</h4>
+          <div>
+            <div class="user_edit">
+              <%= attachment_image_tag @user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+            </div>
+            <div class="user_update">
+              <%= f.file_field :image , value: user.image %>
+            </div>
+          </div>
+          <h4>ニックネーム</h4>
+          <div>
+            <p>
+              <% if @user.nickname.blank? %>
+                no name
+              <% else %>
+                <%= @user.nickname %>
+              <% end %>
+            </p>
+            <div>
+              <%= f.text.field :nickname, value: user.nickname %>
+            </div>
+          </div>
+        </div>
+        <h3>自己紹介</h3>
+        <div>
+          <div class="user_edit">
+            <p>
+              <% if current_user.profile.blank? %>
+              <% else %>
+                <%= current_user.profile %>
+              <% end %>
+            </p>
+            <button class="user_edit" id="user_edit_button">編集する</button>
+          </div>
+          <div class="user_update">
+            <%= f.text_area :profile, value: user.profile %>
+            <%= f.submit "更新する" %>
+            <buttonn class="user_update" id="user_update_button">キャンセルする</button>
+          </div>
+        </div>
+        <div>
+          <h3>コメントの評価</h3>
+          <table>
+            <tr>
+              <td>今週のいいね数</td>
+              <td><%= @user.week_count %></td>
+            </tr>
+            <tr>
+              <td>直近1ヶ月のいいね数</td>
+              <td><%= @user.day30_count %></td>
+            </tr>
+            <tr>
+              <td>トータルいいね数</td>
+              <td><%= @user.total_count %></td>
+            </tr>
+          </table>
+       </div>
+      </div>
+    </div>
+  </div>
+<% end %>
