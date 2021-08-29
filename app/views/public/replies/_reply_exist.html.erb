@@ -22,7 +22,7 @@
         </div>
         <!--編集フォーム-->
         <div class="reply_update reply_update_<%= reply.id %>">
-          <%= f.text_area :text, value: reply.text, size: "120x10" %>
+          <%= f.text_area :text, value: reply.text, size: "120x5" %>
         </div>
         <div class="reply_update reply_update_<%= reply.id %>">
           <%= f.file_field :image, value: reply.image %>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
       <button id="new_comment_btn">コメント</button>
@@ -9,9 +9,9 @@
   </div>
   <div class="row" id="new_comment">
     <%= form_with model: comment, url: post_comments_path(post.id), method: :post, local: true, class: "col" do |f| %>
-      <%= f.text_field :text %>
-      <%= f.file_field :image %>
-      <%= f.submit "送信" %>
+      <%= f.text_area :text, size: "120x5", class: "block" %>
+      <%= f.file_field :image, class: "block" %>
+      <%= f.submit "送信", class: "block" %>
     <% end %>
   </div>
 </div>

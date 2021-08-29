@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col">
         <button id="new_post_btn">新規投稿</button>
@@ -10,9 +10,9 @@
     </div>
     <div class="row" id="new_post">
       <%= form_with model: post, url: posts_path, method: :post, local: true, class: "col" do |f| %>
-        <%= f.text_field :text %>
-        <%= f.file_field :image %>
-        <%= f.submit "送信" %>
+        <%= f.text_area :text, size: "120x5", class: "block" %>
+        <%= f.file_field :image, class: "block" %>
+        <%= f.submit "送信", class: "block" %>
       <% end %>
     </div>
   </div>

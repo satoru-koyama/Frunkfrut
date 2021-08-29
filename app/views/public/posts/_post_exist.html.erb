@@ -31,7 +31,7 @@
         </div>
         <!--編集フォーム-->
         <div class="post_update post_update_<%= post.id %>">
-          <%= f.text_area :text, value: post.text, size: "120x10" %>
+          <%= f.text_area :text, value: post.text, size: "120x5" %>
         </div>
         <div class="post_update post_update_<%= post.id %>">
           <%= f.file_field :image, value: post.image %>

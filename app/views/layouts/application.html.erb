@@ -30,6 +30,10 @@
     <% end %>
     <!--フラッシュメッセージ-->
     <%= render partial: 'layouts/flash', locals: {} %>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+    </footer>
   </body>
 </html>
