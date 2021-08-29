@@ -1,5 +1,8 @@
 class Public::RankingsController < ApplicationController
 
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!, except: [:ranking]
+
   def ranking
 
     # week_countの大きい順に並べる。

@@ -70,7 +70,8 @@ Rails.application.routes.draw do
       resource "reply_reports", only: [:create, :destroy]
     end
 
-    resources "users", only: [:show, :update] do
+    patch "users/my_page", to: "users#update", as: "my_page_update"
+    resources "users", only: [:show] do
       collection do
         get "block"
         get "follow"

@@ -1,13 +1,12 @@
 class Public::UsersController < ApplicationController
 
-  # ログイン済ユーザーのみにアクセスを許可する
-  before_action :authenticate_user!, except: [:ranking]
-
   def show
     @user = User.find(params[:id])
   end
 
   def update
+    @user = current_user
+    @user.update(user_params)
   end
 
   def follow
@@ -19,9 +18,12 @@ class Public::UsersController < ApplicationController
   end
 
   def my_page
+    @user = current_user
   end
 
-  def ranking
+  private
+  def user_params
+    params.require(:user).permit(:name, :email, :nickname, :image, :profile)
   end
 
 end

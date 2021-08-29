@@ -1,0 +1,75 @@
+<%= form_with model: user, url: my_page_update_path, method: :patch, remote: true do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>アカウント情報</h3>
+        <div>
+          <h4>アカウント画像</h4>
+          <div>
+            <div class="user_edit_1">
+              <%= attachment_image_tag user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '100x100' %>
+            </div>
+            <div class="user_update_1">
+              <%= f.file_field :image , value: user.image %>
+            </div>
+          </div>
+          <h4>ニックネーム</h4>
+          <div>
+            <div class="user_edit_1">
+              <p>
+                <% if user.nickname.blank? %>
+                  no name
+                <% else %>
+                  <%= user.nickname %>
+                <% end %>
+              </p>
+            </div>
+            <div class="user_update_1">
+              <%= f.text_field :nickname, value: user.nickname, size: "80" %>
+            </div>
+          </div>
+          <h4>自己紹介</h4>
+          <div>
+            <div class="user_edit_1">
+              <p>
+                <% if user.profile.blank? %>
+                  <p><br><br></p>
+                <% else %>
+                  <%= simple_format(user.profile) %>
+                <% end %>
+              </p>
+            </div>
+            <div class="user_update_1">
+              <%= f.text_area :profile, value: user.profile, size: "120x10" %>
+            </div>
+          </div>
+          <button class="user_edit_1 user_edit_button_1", type="button">編集する</button>
+          <%= f.submit "更新する", class: "user_update_1" %>
+          <button class="user_update_1 user_cancel_button_1", type="button">キャンセルする</button>
+        </div>
+        <div>
+          <h3>登録情報</h3>
+          <div>
+            <h4>name</h4>
+            <div class="user_edit_2">
+              <p><%= user.name %></p>
+            </div>
+            <div class="user_update_2">
+              <%= f.text_field :name, value: user.name, size: "80" %>
+            </div>
+            <h4>email</h4>
+            <div class="user_edit_2">
+              <p><%= user.email %></p>
+            </div>
+            <div class="user_update_2">
+              <%= f.text_field :email, value: user.email, size: "80" %>
+            </div>
+            <button class="user_edit_2 user_edit_button_2", type="button">編集する</button>
+            <%= f.submit "更新する", class: "user_update_2" %>
+            <button class="user_update_2 user_cancel_button_2", type="button">キャンセルする</button>
+          </div>
+       </div>
+      </div>
+    </div>
+  </div>
+<% end %>
