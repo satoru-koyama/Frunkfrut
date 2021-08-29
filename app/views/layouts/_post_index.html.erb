@@ -1,93 +1,94 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
-      <button id="post_index_list_btn">投稿一覧</button>
-    </div>
-    <div class="col">
-      <p>投稿してください</p>
+    <div class="col out_button">
+      <button id="post_index_list_btn" class="button">投稿一覧</button>
+      <div class="text">
+        <p>新着一覧、タイムライン、自分の投稿、過去にコメントした投稿から、表示したい投稿一覧を選べます。</p>
+        <p>投稿は3日間掲示されますが、3日を過ぎると削除され、閲覧できなくなります。</p>
+      </div>
     </div>
   </div>
   <div id="post_index_list">
     <div class="row">
-      <div class="col">
+      <div class="col out_button">
         <!--現在のURLがuser_root_post_pathと一致している場合-->
         <% if request.url == user_root_post_path %>
-          <%= form_with url: user_root_post_path, remote: true do |f| %>
+          <%= form_with url: user_root_post_path, remote: true, class: "inline-block margin-left-50px" do |f| %>
             <%= hidden_field_tag :id, "new" %>
-            <%= f.submit "新着一覧" %>
+            <%= f.submit "新着一覧", class: "button" %>
           <% end %>
         <!--現在のURLがuser_root_post_pathと一致していない場合-->
         <% elsif request.url != user_root_post_path %>
-          <%= form_with url: user_root_post_path, local: true do |f| %>
+          <%= form_with url: user_root_post_path, local: true, class: "inline-block margin-left-50px" do |f| %>
             <%= hidden_field_tag :id, "new" %>
-            <%= f.submit "新着一覧" %>
+            <%= f.submit "新着一覧", class: "button" %>
           <% end %>
         <% end %>
-      </div>
-      <div class="col">
-        <p>押してください</p>
+        <div class="text">
+          <p>すべてのユーザーの投稿を新着順で表示します。</p>
+        </div>
       </div>
     </div>
     <!--ユーザーがログインしている時だけ表示-->
     <% if user_signed_in? %>
       <div class="row">
-        <div class="col">
+        <div class="col out_button">
           <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
-            <%= form_with url: user_root_post_path, remote: true do |f| %>
+            <%= form_with url: user_root_post_path, remote: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "followed" %>
-              <%= f.submit "タイムライン" %>
+              <%= f.submit "タイムライン", class: "button" %>
             <% end %>
           <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
-            <%= form_with url: user_root_post_path, local: true do |f| %>
+            <%= form_with url: user_root_post_path, local: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "followed" %>
-              <%= f.submit "タイムライン" %>
+              <%= f.submit "タイムライン", class: "button" %>
             <% end %>
           <% end %>
-        </div>
-        <div class="col">
-          <p>押してください</p>
+          <div class="text">
+            <p>フォローしたユーザーの投稿を新着順で表示します。</p>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col out_button">
           <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
-            <%= form_with url: user_root_post_path, remote: true do |f| %>
+            <%= form_with url: user_root_post_path, remote: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "my" %>
-              <%= f.submit "自分の投稿" %>
+              <%= f.submit "自分の投稿", class: "button" %>
             <% end %>
           <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
-            <%= form_with url: user_root_post_path, local: true do |f| %>
+            <%= form_with url: user_root_post_path, local: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "my" %>
-              <%= f.submit "自分の投稿" %>
+              <%= f.submit "自分の投稿", class: "button" %>
             <% end %>
           <% end %>
-        </div>
-        <div class="col">
-          <p>押してください</p>
+          <div class="text">
+            <p>自分が送信した投稿を新着順で表示します。</p>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col out_button">
           <!--現在のURLがuser_root_post_pathと一致している場合-->
           <% if request.url == user_root_post_path %>
-            <%= form_with url: user_root_post_path, remote: true do |f| %>
+            <%= form_with url: user_root_post_path, remote: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "commented" %>
-              <%= f.submit "コメントした投稿" %>
+              <%= f.submit "コメントした投稿", class: "button" %>
             <% end %>
           <!--現在のURLがuser_root_post_pathと一致していない場合-->
           <% elsif request.url != user_root_post_path %>
-            <%= form_with url: user_root_post_path, local: true do |f| %>
+            <%= form_with url: user_root_post_path, local: true, class: "inline-block margin-left-50px" do |f| %>
               <%= hidden_field_tag :id, "commented" %>
-              <%= f.submit "コメントした投稿" %>
+              <%= f.submit "コメントした投稿", class: "button" %>
             <% end %>
           <% end %>
-        </div>
-        <div class="col">
-          <p>押してください</p>
+          <div class="text">
+            <p>過去にコメントしたことのある投稿を新着順で表示します。</p>
+          </div>
         </div>
       </div>
     <% end %>

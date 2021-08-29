@@ -47,16 +47,14 @@
   background-size: cover;
   background-position: center;
   background-image: image-url("frunkfrut.jpg");
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .top_text {
   background-color: rgba(255, 255, 255, 0);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform : translate(-50%,-50%);
-  transform : translate(-50%,-50%);
   text-align: center;
 }
 
@@ -66,4 +64,28 @@
   font-size: 30px;
   font-weight: bold;
   margin: 50px 50px;
+}
+
+.out_button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.margin-left-50px {
+  margin-left: 50px;
+}
+
+.text {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  margin-left: 50px;
+  display: inline-block;
 }
