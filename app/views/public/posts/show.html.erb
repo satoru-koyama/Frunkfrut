@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3>投稿</h3>
+      <%= render partial: 'public/posts/show_post', locals: { post: @post } %>
+      <h3>コメント</h3>
+      <% if user_signed_in? %>
+        <%= render partial: 'public/comments/new_comment', locals: { post: @post, comment: @comment } %>
+      <% end %>
+      <%= render partial: 'public/comments/index_comment', locals: { comments: @comments } %>
+    </div>
+  </div>
+</div>

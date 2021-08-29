@@ -1,0 +1,45 @@
+<!--部分テンプレートだけを更新させる-->
+$('.my_page').html("<%= j(render partial: "public/users/my_page", locals: {user: @user}) %>");
+
+$(function () {
+  $('.user_update_1').hide();
+  $('.user_edit_button_1').on("click", function () {
+    const userEdit = $('.user_edit_1');
+    const userUpdate = $('.user_update_1');
+
+    userEdit.hide();
+    userUpdate.show();
+  });
+});
+
+$(function () {
+  $('.user_cancel_button_1').on("click", function () {
+    const userEdit = $('.user_edit_1');
+    const userUpdate = $('.user_update_1');
+
+    userEdit.show();
+    userUpdate.hide();
+  });
+});
+
+$(function () {
+  $('.user_update_2').hide();
+  $('.user_edit_button_2').on("click", function () {
+    const userEdit = $('.user_edit_2');
+    const userUpdate = $('.user_update_2');
+
+    userEdit.hide();
+    userUpdate.show();
+  });
+});
+
+$(function () {
+  $('.user_cancel_button_2').on("click", function () {
+    const userEdit = $('.user_edit_2');
+    const userUpdate = $('.user_update_2');
+
+    userEdit.show();
+    userUpdate.hide();
+  });
+});
+

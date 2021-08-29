@@ -1,0 +1,16 @@
+<!--投稿主画像-->
+<%= link_to user_path(post.user.id) do %>
+  <div class="inline-block">
+    <%= attachment_image_tag post.user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+  </div>
+<% end %>
+<!--投稿主ニックネーム-->
+<%= link_to user_path(post.user.id) do %>
+  <p class="inline-block">
+    <% if post.user.nickname.blank? %>
+      no name
+    <% else %>
+      <%= post.user.nickname %>
+    <% end %>
+  </p>
+<% end %>

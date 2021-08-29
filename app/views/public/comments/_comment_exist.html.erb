@@ -1,0 +1,91 @@
+<%= form_with model: comment, url: post_comment_path(post_id: comment.post_id, id: comment.id), method: :patch, remote: true do |f| %>
+  <div class="row">
+    <div class="col">
+      <div>
+        <!--ユーザー情報-->
+        <%= render partial: "public/comments/comment_user", locals: {comment: comment} %>
+        <!--返信数-->
+        <p class="inline-block">
+          返信数<%= comment.replies.where(is_deleted: false).count %>
+        </p>
+        <!--いいねボタン-->
+        <p class="inline-block" id="comment_favorite_<%= comment.id %>">
+          <% if user_signed_in? %>
+            <%= render partial: "public/comments/comment_favorite", locals: {comment: comment} %>
+          <% end %>
+        </p>
+      </div>
+
+      <div>
+        <!--コメントテキスト-->
+        <div class="comment_edit_<%= comment.id %>">
+          <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id) do %>
+            <%= simple_format(comment.text) %>
+          <% end %>
+        </div>
+        <!--コメント画像-->
+        <div class="comment_edit_<%= comment.id %>">
+          <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id) do %>
+            <%= attachment_image_tag comment, :image, :fill, 400, 250, format: 'jpg' %>
+          <% end %>
+        </div>
+
+        <!--編集フォーム-->
+        <div class="comment_update comment_update_<%= comment.id %>">
+          <%= f.text_area :text, value: comment.text, size: "120x5" %>
+        </div>
+        <div class="comment_update comment_update_<%= comment.id %>">
+          <%= f.file_field :image, value: comment.image %>
+        </div>
+      </div>
+
+      <div>
+        <!--コメント日時-->
+        <div class="inline-block comment_edit_<%= comment.id %>">
+          <p>
+            コメント日時<%= l comment.created_at %>
+          </p>
+        </div>
+        <div class="inline-block comment_edit_<%= comment.id %>">
+          <% if comment.updated_at != comment.created_at %>
+            <!--更新日時-->
+            <p>
+              更新日時<%= l comment.updated_at %>
+            </p>
+          <% end %>
+        </div>
+        <!--報告ボタン-->
+        <div class="inline-block comment_edit_<%= comment.id %>">
+          <p id="comment_report_<%= comment.id %>">
+            <% if user_signed_in? %>
+              <%= render partial: "public/comments/comment_report", locals: {comment: comment} %>
+            <% end %>
+          </p>
+        </div>
+        <!--コメント主がログインユーザーの場合に表示-->
+        <% if user_signed_in? %>
+          <% if comment.user_id == current_user.id %>
+            <div class="inline-block comment_edit_<%= comment.id %>">
+              <!--編集ボタン-->
+              <button type="button" id="comment_edit_button_<%= comment.id %>" class="comment_edit_button">編集する</button>
+            </div>
+            <div class="inline-block comment_edit_<%= comment.id %>">
+              <!--削除するボタン-->
+              <%= link_to delete_post_comment_path(post_id: comment.post_id, id: comment.id), method: :patch do %>
+                <button type="button">削除する</button>
+              <% end %>
+            </div>
+            <div class="inline-block comment_update comment_update_<%= comment.id %>">
+              <!--更新するボタン-->
+              <%= f.submit "更新する" %>
+            </div>
+            <div class="inline-block comment_update comment_update_<%= comment.id %>" >
+              <!--編集キャンセルボタン-->
+              <button type="button" id="comment_cancel_button_<%= comment.id %>" class="comment_cancel_button">キャンセルする</button>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

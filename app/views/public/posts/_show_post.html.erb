@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <% if post.is_deleted == false %>
+    <div id="post_<%= post.id %>">
+      <%= render partial: "public/posts/post_exist", locals: {post: post} %>
+    </div>
+  <% elsif post.is_deleted == true && post.comments.find_by(is_deleted: false) %>
+    <%= render partial: "public/posts/post_delete", locals: {post: post} %>
+  <% end %>
+</div>

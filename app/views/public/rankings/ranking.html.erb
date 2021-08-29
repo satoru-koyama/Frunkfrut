@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <%= form_with url: ranking_post_path, method: :post, remote: true, class: "col"  do |f| %>
+          <%= hidden_field_tag :id, "top100_ranking" %>
+          <%= f.submit "1位から100位までのランキング" %>
+        <% end %>
+        <%= form_with url: ranking_post_path, method: :post, remote: true, class: "col" do |f| %>
+          <%= hidden_field_tag :id, "my_ranking" %>
+          <%= f.submit "自分のランキング"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!--ランキング-->
+  <div id="ranking">
+    <% @id = "top100_ranking" %>
+    <%= render partial: "public/rankings/ranking", locals: {id: @id, rankings: @rankings} %>
+  </div>
+</div>

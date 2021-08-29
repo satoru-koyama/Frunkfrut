@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button>会員詳細</button>
+    </div>
+    <div class="col">
+      <p>説明</p>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <div class="col">
+        <%= attachment_image_tag @user, :user_image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
+      </div>
+      <div class="col">
+        <table>
+          <tr>
+            <td><h4>name</h4></td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td><h4>email</h4></td>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <div>通報数<%= @user.report_count %></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      会員情報
+    </div>
+    <div class="col">
+      <p>説明</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h4>自己紹介</h4>
+      <div><%= @user.profile %></div>
+      <div>
+        <div style="display: inline-block">フォロー会員一覧</div>
+        <div style="display: inline-block">ブロック会員一覧</div>
+      </div>
+      <div>
+        <h4>コメント評価</h4>
+        <table>
+          <tr>
+            <td>今週のいいね数</td>
+            <td><%= @user.week_count %></td>
+          </tr>
+          <tr>
+            <td>直近30日のいいね数</td>
+            <td><%= @user.day30_count %></td>
+          </tr>
+          <tr>
+            <td>トータルいいね数</td>
+            <td><%= @user.total_count %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <% if @user.is_deleted == false %>
+        <%= link_to delete_admin_user_path(@user.id), method: :patch do %>
+          <button>アカウントを停止させる</button>
+        <% end %>
+      <% else %>
+        <%= link_to undo_admin_user_path(@user.id), method: :patch do %>
+          <button>アカウントを元に戻す</button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,30 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <% if user_signed_in? %>
+        <!--ユーザー側ヘッダー-->
+        <%= render partial: 'layouts/user_header', locals: {} %>
+      <% elsif admin_signed_in? %>
+        <!--管理者側ヘッダー-->
+        <%= render partial: 'layouts/admin_header', locals: {} %>
+      <% else %>
+        <!--どちらもログインしていないときのヘッダー-->
+        <%= render partial: 'layouts/header', locals: {} %>
+      <% end %>
+    </header>
+    <% unless admin_signed_in? %>
+      <!--新規投稿-->
+      <%= render partial: 'layouts/new_post', locals: { post: @new_post } %>
+      <!--投稿一覧-->
+      <%= render partial: 'layouts/post_index', locals: {} %>
+    <% end %>
+    <!--フラッシュメッセージ-->
+    <%= render partial: 'layouts/flash', locals: {} %>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+    </footer>
   </body>
 </html>

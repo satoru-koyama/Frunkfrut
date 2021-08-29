@@ -1,0 +1,9 @@
+<% if !current_user.followed_users.find_by(id: user.id) && user_signed_in? && current_user.id != user.id && user.is_deleted == false %>
+  <%= link_to user_follow_relationships_path(user_id: user.id), method: :post, remote: true do %>
+    <button>フォローする</button>
+  <% end %>
+<% elsif current_user.followed_users.find_by(id: user.id) && user_signed_in? && current_user.id != user.id && user.is_deleted == false %>
+  <%= link_to user_follow_relationships_path(user_id: user.id), method: :delete, remote: true do %>
+    <button>フォローを外す</button>
+  <% end %>
+<% end %>

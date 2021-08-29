@@ -1,0 +1,96 @@
+<%= form_with model: post, url: post_path(post.id), method: :patch, remote: true do |f| %>
+  <div class="row">
+    <div class="col">
+      <div>
+        <!--投稿ユーザー-->
+        <%= render partial: "public/posts/post_user", locals: {post: post} %>
+        <!--コメント数-->
+        <p class="inline-block">
+          コメント数<%= post.comments.where(is_deleted: false).count %>
+        </p>
+        <!--いいねボタン-->
+        <p class="inline-block" id="post_favorite_<%= post.id %>">
+          <% if user_signed_in? %>
+            <%= render partial: "public/posts/post_favorite", locals: {post: post} %>
+          <% end %>
+        </p>
+      </div>
+
+      <div>
+        <!--投稿テキスト-->
+        <div class="post_edit_<%= post.id %>">
+          <%= link_to post_path(post.id) do %>
+            <%= simple_format(post.text) %>
+          <% end %>
+        </div>
+        <!--投稿画像-->
+        <div class="post_edit_<%= post.id %>">
+          <%= link_to post_path(post.id) do %>
+            <%= attachment_image_tag post, :image, :fill, 400, 250, format: 'jpg' %>
+          <% end %>
+        </div>
+        <!--編集フォーム-->
+        <div class="post_update post_update_<%= post.id %>">
+          <%= f.text_area :text, value: post.text, size: "120x5" %>
+        </div>
+        <div class="post_update post_update_<%= post.id %>">
+          <%= f.file_field :image, value: post.image %>
+        </div>
+      </div>
+
+      <div>
+        <!--投稿日時-->
+        <div class="inline-block post_edit_<%= post.id %>">
+          <p>
+            投稿日時<%= l post.created_at %>
+          </p>
+        </div>
+        <div class="inline-block post_edit_<%= post.id %>">
+          <% if post.updated_at != post.created_at %>
+            <!--更新日時-->
+            <p>
+              更新日時<%= l post.updated_at %>
+            </p>
+          <% end %>
+        </div>
+        <!--残り時間-->
+        <div class="inline-block">
+          <p class="post_edit_<%= post.id %>">
+            残り<%= post.countdown %>
+          </p>
+        </div>
+        <!--報告ボタン-->
+        <div class="inline-block post_edit_<%= post.id %>">
+          <p id="post_report_<%= post.id %>">
+            <% if user_signed_in? %>
+              <%= render partial: "public/posts/post_report", locals: {post: post} %>
+            <% end %>
+          </p>
+        </div>
+        <!--投稿主がログインユーザーの場合に表示-->
+        <% if user_signed_in? %>
+          <% if post.user_id == current_user.id %>
+            <div class="inline-block post_edit_<%= post.id %>">
+              <!--編集ボタン-->
+              <button type="button" id="post_edit_button_<%= post.id %>" class="post_edit_button">編集する</button>
+            </div>
+            <div class="inline-block post_edit_<%= post.id %>">
+              <!--削除ボタン-->
+              <%= link_to delete_post_path(post.id), method: :patch do %>
+                <button type="button">削除する</button>
+              <% end %>
+            </div>
+            <div class="inline-block post_update post_update_<%= post.id %>">
+              <!--更新するボタン-->
+              <%= f.submit "更新する" %>
+            </div>
+            <div class="inline-block post_update post_update_<%= post.id %>" >
+              <!--編集キャンセルボタン-->
+              <button type="button" id="post_cancel_button_<%= post.id %>" class="post_cancel_button">キャンセルする</button>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
