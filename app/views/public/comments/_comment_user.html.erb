@@ -1,12 +1,12 @@
 <!--コメント主画像-->
 <%= link_to user_path(comment.user.id) do %>
-  <div class="col">
+  <div class="inline-block">
     <%= attachment_image_tag comment.user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '30x30' %>
   </div>
 <% end %>
 <!--コメント主ニックネーム-->
 <%= link_to user_path(comment.user.id) do %>
-  <p class="col">
+  <p class="inline-block">
     <% if comment.user.nickname.blank? %>
       no name
     <% else %>

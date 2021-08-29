@@ -1,0 +1,22 @@
+<!--部分テンプレートだけを更新させる-->
+$('#post_<%= @post.id %>').html("<%= j(render partial: "public/posts/post_exist", locals: {post: @post}) %>");
+
+$('.post_update').hide();
+
+$('.post_edit_button').on('click',  function(){
+    const postId = $(this).attr('id').replace(/[^0-9]/g, '');
+    const postEdit = $('.post_edit_' + postId);
+    const postUpdate = $('.post_update_' + postId);
+
+    postEdit.hide();
+    postUpdate.show();
+})
+
+$(document).on("click", ".post_cancel_button", function () {
+  const postId = $(this).attr('id').replace(/[^0-9]/g, '');
+  const postEdit = $('.post_edit_' + postId);
+  const postUpdate = $('.post_update_' + postId);
+
+  postEdit.show();
+  postUpdate.hide();
+});

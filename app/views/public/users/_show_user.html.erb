@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3>アカウント情報</h3>
+      <div>
+        <h4>アカウント画像</h4>
+        <div>
+          <div>
+            <%= attachment_image_tag user, :image, :fill, 30, 30, format: 'jpg', fallback: "noimage.jpg", size: '60x60' %>
+          </div>
+        </div>
+        <h4>ニックネーム</h4>
+        <div>
+          <div>
+            <p>
+              <% if user.nickname.blank? %>
+                no name
+              <% else %>
+                <%= user.nickname %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <h4>自己紹介</h4>
+        <div>
+          <div>
+            <p>
+              <% if current_user.profile.blank? %>
+                <p><br><br></p>
+              <% else %>
+                <%= current_user.profile %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>コメントの評価</h3>
+        <table>
+          <tr>
+            <td>今週のいいね数</td>
+            <td><%= user.week_count %></td>
+          </tr>
+          <tr>
+            <td>直近1ヶ月のいいね数</td>
+            <td><%= user.day30_count %></td>
+          </tr>
+          <tr>
+            <td>トータルいいね数</td>
+            <td><%= user.total_count %></td>
+          </tr>
+        </table>
+     </div>
+    </div>
+  </div>
+</div>

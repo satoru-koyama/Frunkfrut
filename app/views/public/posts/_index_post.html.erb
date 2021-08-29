@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
       <% if id == "new" %>
@@ -12,11 +12,13 @@
       <% end %>
     </div>
   </div>
-    <% posts.each do |post| %>
-      <% if post.is_deleted == false %>
+  <% posts.each do |post| %>
+    <% if post.is_deleted == false %>
+      <div id="post_<%= post.id %>">
         <%= render partial: "public/posts/post_exist", locals: {post: post} %>
-      <% elsif post.is_deleted == true && (post.comments.find_by(is_deleted: false) || post.replies.find_by(is_deleted: false)) %>
-        <%= render partial: "public/posts/post_delete", locals: {post: post} %>
-      <% end %>
+      </div>
+    <% elsif post.is_deleted == true && (post.comments.find_by(is_deleted: false) || post.replies.find_by(is_deleted: false)) %>
+      <%= render partial: "public/posts/post_delete", locals: {post: post} %>
     <% end %>
+  <% end %>
 </div>

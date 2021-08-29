@@ -1,3 +1,13 @@
-<%= render partial: 'public/comments/show_comment', locals: { comment: @comment } %>
-<%= render partial: 'public/replies/new_reply', locals: { comment: @comment, reply: @reply } %>
-<%= render partial: 'public/replies/index_reply', locals: { replies: @replies } %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3>投稿</h3>
+      <%= render partial: 'public/posts/show_post', locals: { post: @comment.post } %>
+      <h3>コメント</h3>
+      <%= render partial: 'public/comments/show_comment', locals: { comment: @comment } %>
+      <h3>返信</h3>
+      <%= render partial: 'public/replies/new_reply', locals: { comment: @comment, reply: @reply } %>
+      <%= render partial: 'public/replies/index_reply', locals: { replies: @replies } %>
+    </div>
+  </div>
+</div>

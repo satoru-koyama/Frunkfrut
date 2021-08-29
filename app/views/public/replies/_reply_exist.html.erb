@@ -1,57 +1,82 @@
-<div>
+<%= form_with model: reply, url: comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch, remote: true do |f| %>
   <div class="row">
-    <!--ユーザー情報-->
-      <%= render partial: "public/replies/reply_user", locals: {reply: reply} %>
-    <!--いいねボタン-->
-    <p class="col" id="reply_favorite_<%= reply.id %>">
-      <%= render partial: "public/replies/reply_favorite", locals: {reply: reply} %>
-    </p>
-  </div>
-  <div class="row">
-    <!--返信テキスト-->
-    <p class="col">
-      <%= reply.text %>
-    </p>
-  </div>
-  <div class="row">
-    <!--返信画像-->
     <div class="col">
-      <%= attachment_image_tag reply, :image, :fill, 400, 250, format: 'jpg' %>
-    </div>
-  </div>
-  <div class="row">
-    <!--返信日時-->
-    <p class="col">
-      返信日時<%= l reply.created_at %>
-    </p>
-    <% if reply.updated_at != reply.created_at %>
-      <!--更新日時-->
-      <p class="col">
-        更新日時<%= l reply.updated_at %>
-      </p>
-    <% end %>
-    <!--報告ボタン-->
-    <p class="col" id="reply_report_<%= reply.id %>">
-      <%= render partial: "public/replies/reply_report", locals: {reply: reply} %>
-    </p>
-    <!--返信主がログインユーザーの場合に表示-->
-    <% if reply.user_id == current_user.id %>
-      <!--編集ボタン-->
-      <div class="col">
-        <button>編集する</button>
+      <div>
+        <!--ユーザー情報-->
+        <%= render partial: "public/replies/reply_user", locals: {reply: reply} %>
+        <!--いいねボタン-->
+        <p class="inline-block" id="reply_favorite_<%= reply.id %>">
+          <% if user_signed_in? %>
+            <%= render partial: "public/replies/reply_favorite", locals: {reply: reply} %>
+          <% end %>
+        </p>
       </div>
-        <!--更新するボタン-->
-        <div class="col">
-          <%= link_to comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch do %>
-            <button>更新する</button>
+      <div>
+        <!--返信テキスト-->
+        <div class="reply_edit_<%= reply.id %>">
+          <%= simple_format(reply.text) %>
+        </div>
+        <!--返信画像-->
+        <div class="reply_edit_<%= reply.id %>">
+          <%= attachment_image_tag reply, :image, :fill, 400, 250, format: 'jpg' %>
+        </div>
+        <!--編集フォーム-->
+        <div class="reply_update reply_update_<%= reply.id %>">
+          <%= f.text_area :text, value: reply.text, size: "120x5" %>
+        </div>
+        <div class="reply_update reply_update_<%= reply.id %>">
+          <%= f.file_field :image, value: reply.image %>
+        </div>
+      </div>
+
+      <div>
+        <!--返信日時-->
+        <div class="inline-block reply_edit_<%= reply.id %>">
+          <p>
+            返信日時<%= l reply.created_at %>
+          </p>
+        </div>
+
+        <div class="inline-block reply_edit_<%= reply.id %>">
+          <% if reply.updated_at != reply.created_at %>
+            <!--更新日時-->
+            <p>
+              更新日時<%= l reply.updated_at %>
+            </p>
           <% end %>
         </div>
-      <!--取り消すボタン-->
-      <div class="col">
-        <%= link_to delete_comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch do %>
-          <button>取り消す</button>
+        <!--報告ボタン-->
+        <div class="inline-block reply_edit_<%= reply.id %>">
+          <p id="reply_report_<%= reply.id %>">
+            <% if user_signed_in? %>
+              <%= render partial: "public/replies/reply_report", locals: {reply: reply} %>
+            <% end %>
+          </p>
+        </div>
+        <!--返信主がログインユーザーの場合に表示-->
+        <% if user_signed_in? %>
+          <% if reply.user_id == current_user.id %>
+            <div class="inline-block reply_edit_<%= reply.id %>">
+              <!--編集ボタン-->
+              <button type="button" id="reply_edit_button_<%= reply.id %>" class="reply_edit_button">編集する</button>
+            </div>
+            <div class="inline-block reply_edit_<%= reply.id %>">
+              <!--削除するボタン-->
+              <%= link_to delete_comment_reply_path(comment_id: reply.comment_id, id: reply.id), method: :patch do %>
+                <button type="button">削除する</button>
+              <% end %>
+            </div>
+            <div class="inline-block reply_update reply_update_<%= reply.id %>">
+              <!--更新するボタン-->
+              <%= f.submit "更新する" %>
+            </div>
+            <div class="inline-block reply_update reply_update_<%= reply.id %>" >
+              <!--編集キャンセルボタン-->
+              <button type="button" id="reply_cancel_button_<%= reply.id %>" class="reply_cancel_button">キャンセルする</button>
+            </div>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

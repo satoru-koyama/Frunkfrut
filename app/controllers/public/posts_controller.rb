@@ -49,7 +49,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to request.referer
+
   end
 
   def delete
