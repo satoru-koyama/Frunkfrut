@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="top" >
+        <div class="top_text">
+          <p style="font-size: 100px; font-weight: bold;">Frunkfrut</p>
+          <p style="font-size: 30px; font-weight: bold;">フランクな気持ちで気軽にコメントしよう</p>
+          <% unless user_signed_in? %>
+            <%= link_to new_user_registration_path do %>
+              <button style="button" class="top_button">会員登録</button>
+            <% end %>
+            <%= link_to new_user_session_path do %>
+              <button style="button" class="top_button">ログイン</button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
