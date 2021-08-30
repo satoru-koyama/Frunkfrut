@@ -13,7 +13,7 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 
 # デプロイ時に必要なgemなので追加
-gem "sassc", "< 2.2.0"
+gem "sassc"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

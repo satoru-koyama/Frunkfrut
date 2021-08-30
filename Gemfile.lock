@@ -309,6 +309,7 @@ DEPENDENCIES
   refile-mini_magick
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
+  sassc
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
